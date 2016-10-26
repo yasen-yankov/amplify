@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Telerik.Sitefinity.AMP.Web.Services;
-using Telerik.Sitefinity.Web;
 using Telerik.Sitefinity.Web.UI;
 
 namespace Telerik.Sitefinity.AMP.Web.UI
@@ -45,17 +43,6 @@ namespace Telerik.Sitefinity.AMP.Web.UI
 			get
 			{
 				return null;
-			}
-		}
-
-		/// <summary>
-		/// Gets a reference to the html element that serves URL for single amp page hidden field
-		/// </summary>
-		protected HiddenField AmpPagesPageUrlHiddenField
-		{
-			get
-			{
-				return this.Container.GetControl<HiddenField>("hdfAmpPagesPageHyperLink", true);
 			}
 		}
 
@@ -102,12 +89,8 @@ namespace Telerik.Sitefinity.AMP.Web.UI
 		/// <inheritdoc />
 		protected override void InitializeControls(GenericContainer container)
 		{
-			var currentNode = BackendSiteMap.FindSiteMapNode(AmpPagesPagesId, false);
-			this.AmpPagesPageUrlHiddenField.Value = RouteHelper.ResolveUrl(currentNode != null ? currentNode.Url : "~/Sitefinity", UrlResolveOptions.Rooted | UrlResolveOptions.RemoveTrailingSlash);
 			this.AmpServiceUrlHiddenField.Value = VirtualPathUtility.ToAbsolute("~/RestApi/" + AmpServiceStackPlugin.AmpPagesRoute);
 		}
-
-		internal Guid AmpPagesPagesId = Guid.Parse("3e74a66b-e8c9-4420-9ceb-36810311a480");
 		
 		internal const string ScriptReference = "Telerik.Sitefinity.AMP.Web.UI.Scripts.AmpPagesView.js";
 		private static readonly string LayoutTemplatePathName = "~/AMP/Telerik.Sitefinity.AMP.Web.UI.Views.AmpPagesView.ascx";

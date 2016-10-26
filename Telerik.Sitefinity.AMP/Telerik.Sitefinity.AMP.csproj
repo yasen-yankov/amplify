@@ -171,9 +171,8 @@
     <Compile Include="Web\Services\Dto\AmpPageUpdateRequest.cs" />
     <Compile Include="Web\Services\Dto\AmpPageDeleteRequest.cs" />
     <Compile Include="Web\Services\Dto\WrapperTagDto.cs" />
-    <Compile Include="Web\UI\AmpPageses\AmpPagesesEmptyPage.cs" />
     <Compile Include="Web\UI\AmpPagesView.cs" />
-<Compile Include="Web\UI\AmpPageView.cs" />
+    <Compile Include="Web\UI\AmpPageView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -190,9 +189,6 @@
     <Content Include="Mvc\Models\readme.txt" />
     <Content Include="Mvc\Views\readme.txt" />
     <Content Include="Web\Scripts\readme.txt" />
-    <EmbeddedResource Include="Web\UI\AmpPageses\AmpPagesesEmptyPage.ascx">
-      <SubType>ASPXCodeBehind</SubType>
-    </EmbeddedResource>
     <Content Include="Web\UI\readme.txt" />
     <EmbeddedResource Include="Web\UI\Scripts\AmpPagesView.js" />
     <EmbeddedResource Include="Web\UI\Views\AmpPagesView.ascx">

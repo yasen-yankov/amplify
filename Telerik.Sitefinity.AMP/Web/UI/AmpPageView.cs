@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using Telerik.Sitefinity.Web;
 using Telerik.Sitefinity.Web.UI;
 
@@ -51,6 +52,11 @@ namespace Telerik.Sitefinity.AMP.Web.UI
 		//	get { return this.Container.GetControl<HiddenField>("hdfAddonsServiceUrl", true); }
 		//}
 
+		protected HiddenField AmpPageUrlHiddenField
+		{
+			get { return this.Container.GetControl<HiddenField>("", true); }
+		}
+
 		#endregion
 
 		/// <inheritdoc />
@@ -79,12 +85,9 @@ namespace Telerik.Sitefinity.AMP.Web.UI
 		/// <inheritdoc />
 		protected override void InitializeControls(GenericContainer container)
 		{
-			var currentNode = BackendSiteMap.FindSiteMapNode(AmpPageId, false);
-			//this.AmpPagePageUrlHiddenField.Value = RouteHelper.ResolveUrl(currentNode != null ? currentNode.Url : "~/Sitefinity", UrlResolveOptions.Rooted | UrlResolveOptions.RemoveTrailingSlash);
 			//this.AmpPageServiceUrlHiddenField.Value =  VirtualPathUtility.ToAbsolute("~/RestApi/" + AmpServiceStackPlugin.AmpPageInsertRoute);
 		}
 
-		internal Guid AmpPageId = Guid.Parse("19489ce6-04b8-47dc-ad4c-19cde280ee74");
 		internal const string ScriptReference = "Telerik.Sitefinity.AMP.Web.UI.Scripts.AmpPageView.js";
 
 		private static readonly string LayoutTemplatePathName = "~/AMP/Telerik.Sitefinity.AMP.Web.UI.Views.AmpPageView.ascx";

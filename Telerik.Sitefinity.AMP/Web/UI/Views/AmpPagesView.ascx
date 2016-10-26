@@ -65,11 +65,9 @@
 
 <script>
 		angular.module("AmpModule").value("ampServiceUrl", "<%= hdfAmpServiceUrl.Value%>");
-		angular.module("AmpModule").value("ampPagesPageUrl", "<%= hdfAmpPagesPageHyperLink.Value%>");
 </script>
 
 <asp:HiddenField runat="server" ID="hdfAmpServiceUrl" />
-<asp:HiddenField runat="server" ID="hdfAmpPagesPageHyperLink" />
 
 <script>
 		$(document).ready(function () {

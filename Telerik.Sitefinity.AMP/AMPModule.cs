@@ -1,22 +1,12 @@
 ﻿using System;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Web.UI.WebControls;
-using Telerik.Sitefinity;
 using Telerik.Sitefinity.Abstractions;
-using Telerik.Sitefinity.Abstractions.VirtualPath;
 using Telerik.Sitefinity.Abstractions.VirtualPath.Configuration;
-using Telerik.Sitefinity.Configuration;
-using Telerik.Sitefinity.Data;
-using Telerik.Sitefinity.Fluent.Modules;
-using Telerik.Sitefinity.Fluent.Modules.Toolboxes;
-using Telerik.Sitefinity.Modules.Pages.Configuration;
-using Telerik.Sitefinity.Services;
-using Telerik.Sitefinity.Web.UI;
 using Telerik.Sitefinity.AMP.Configuration;
-using Telerik.Sitefinity.AMP.Web.UI.AmpPageses;
 using Telerik.Sitefinity.AMP.Web.Services;
 using Telerik.Sitefinity.AMP.Web.UI;
+using Telerik.Sitefinity.Configuration;
+using Telerik.Sitefinity.Fluent.Modules;
+using Telerik.Sitefinity.Services;
 
 namespace Telerik.Sitefinity.AMP
 {
@@ -353,16 +343,16 @@ namespace Telerik.Sitefinity.AMP
 						.SetDescriptionLocalized("AmpPagesGroupPageDescription")
 						.AddControl(new AmpPagesView())
 						.HideFromNavigation()
-					.Done()
+						.Done()
 					.AddChildPage(AMPModule.AmpPageDetailPageId, "Amp page")
-						   .LocalizeUsing<AMPResources>()
-						   .SetTitleLocalized("AmpPageTitle")
-						   .SetDescriptionLocalized("AmpPageDescription")
-						   .SetUrlNameLocalized("AmpPageUrl")
-						   .SetTemplate(SiteInitializer.BackendHtml5TemplateId)
-						   .AddControl(new AmpPageView())
-						   .HideFromNavigation()
-						   .Done()
+						.LocalizeUsing<AMPResources>()
+						.SetTitleLocalized("AmpPageTitle")
+						.SetDescriptionLocalized("AmpPageDescription")
+						.SetUrlNameLocalized("AmpPageUrl")
+						.SetTemplate(SiteInitializer.BackendHtml5TemplateId)
+						.AddControl(new AmpPageView())
+						.HideFromNavigation()
+						.Done()
 				.Done();
 		}
 
@@ -372,11 +362,6 @@ namespace Telerik.Sitefinity.AMP
         internal const string ModuleDescription = "This is a Custom Module which has been built with Sitefinity Thunder.";
         internal const string ModuleVirtualPath = "~/AMP/";
         private static readonly Type[] managerTypes = new Type[] { typeof(AMPManager) };
-
-
-		//TODO: Check if this is the correct id. If it's the same as in AmpPagesView, move it to common place
-		internal Guid AmpPagesPagesId = Guid.Parse("3e74a66b-e8c9-4420-9ceb-36810311a480");
-		internal Guid ModuleNodeId = Guid.Parse("da18dcb8-0480-4969-9dde-caa496b869ab");
 
         internal static readonly Guid AmpPagesGroupPageId = new Guid("3e74a66b-e8c9-4420-9ceb-36810311a480");
         internal static readonly Guid AmpPagesHomePageId = new Guid("e8816474-4b2b-45a9-8e1d-9beda4f7dcd1");
