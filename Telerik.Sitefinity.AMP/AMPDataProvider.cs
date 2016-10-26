@@ -17,7 +17,7 @@ namespace Telerik.Sitefinity.AMP
             {
                 knownTypes = new Type[]
                 {
-                    typeof(AmpPages)
+                    typeof(AmpPage)
                 };
             }
             return knownTypes;
@@ -41,32 +41,32 @@ namespace Telerik.Sitefinity.AMP
         /// Creates a new AmpPages and returns it.
         /// </summary>
         /// <returns>The new AmpPages.</returns>
-        public abstract AmpPages CreateAmpPages();
+        public abstract AmpPage CreateAmpPage();
         
         /// <summary>
         /// Gets a AmpPages by a specified ID.
         /// </summary>
         /// <param name="id">The ID.</param>
         /// <returns>The AmpPages.</returns>
-        public abstract AmpPages GetAmpPages(Guid id);
+        public abstract AmpPage GetAmpPage(Guid id);
         
         /// <summary>
         /// Gets a query of all the AmpPages items.
         /// </summary>
         /// <returns>The AmpPages items.</returns>
-        public abstract IQueryable<AmpPages> GetAmpPageses();
+        public abstract IQueryable<AmpPage> GetAmpPages();
         
         /// <summary>
         /// Updates the AmpPages.
         /// </summary>
         /// <param name="entity">The AmpPages entity.</param>
-        public abstract void UpdateAmpPages(AmpPages entity);
+        public abstract void UpdateAmpPage(AmpPage entity);
         
         /// <summary>
         /// Deletes the AmpPages.
         /// </summary>
         /// <param name="entity">The AmpPages entity.</param>
-        public abstract void DeleteAmpPages(AmpPages entity);
+        public abstract void DeleteAmpPage(AmpPage entity);
         #endregion
         
         #region Private fields and constants

@@ -34,10 +34,10 @@ namespace Telerik.Sitefinity.AMP.Data.OpenAccess
         /// Gets a query of all the AmpPages items.
         /// </summary>
         /// <returns>The AmpPages items.</returns>
-        public override IQueryable<AmpPages> GetAmpPageses()
+        public override IQueryable<AmpPage> GetAmpPages()
         {
             return SitefinityQuery
-                .Get<AmpPages>(this, MethodBase.GetCurrentMethod())
+                .Get<AmpPage>(this, MethodBase.GetCurrentMethod())
                 .Where(b => b.ApplicationName == this.ApplicationName);
         }
         
@@ -46,23 +46,23 @@ namespace Telerik.Sitefinity.AMP.Data.OpenAccess
         /// </summary>
         /// <param name="id">The ID.</param>
         /// <returns>The AmpPages.</returns>
-        public override AmpPages GetAmpPages(Guid id)
+        public override AmpPage GetAmpPage(Guid id)
         {
             if (id == Guid.Empty)
                 throw new ArgumentException("Id cannot be Empty Guid");
 
-            return this.GetContext().GetItemById<AmpPages>(id.ToString());
+            return this.GetContext().GetItemById<AmpPage>(id.ToString());
         }
         
         /// <summary>
         /// Creates a new AmpPages and returns it.
         /// </summary>
         /// <returns>The new AmpPages.</returns>
-        public override AmpPages CreateAmpPages()
+        public override AmpPage CreateAmpPage()
         {
             Guid id = Guid.NewGuid();
 
-            var item = new AmpPages(id, this.ApplicationName);
+            var item = new AmpPage(id, this.ApplicationName);
                 
             if (id != Guid.Empty)
                 this.GetContext().Add(item);
@@ -74,7 +74,7 @@ namespace Telerik.Sitefinity.AMP.Data.OpenAccess
         /// Updates the AmpPages.
         /// </summary>
         /// <param name="entity">The AmpPages entity.</param>
-        public override void UpdateAmpPages(AmpPages entity)
+        public override void UpdateAmpPage(AmpPage entity)
         {
             entity.LastModified = DateTime.UtcNow;
         }
@@ -83,7 +83,7 @@ namespace Telerik.Sitefinity.AMP.Data.OpenAccess
         /// Deletes the AmpPages.
         /// </summary>
         /// <param name="entity">The AmpPages entity.</param>
-        public override void DeleteAmpPages(AmpPages entity)
+        public override void DeleteAmpPage(AmpPage entity)
         {
             this.GetContext().Remove(entity);
         }

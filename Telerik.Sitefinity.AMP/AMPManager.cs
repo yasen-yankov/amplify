@@ -106,27 +106,27 @@ namespace Telerik.Sitefinity.AMP
         /// Creates a AmpPages.
         /// </summary>
         /// <returns>The created AmpPages.</returns>
-        public AmpPages CreateAmpPages()
+        public AmpPage CreateAmpPage()
         {
-            return this.Provider.CreateAmpPages();
+            return this.Provider.CreateAmpPage();
         }
 
         /// <summary>
         /// Updates the AmpPages.
         /// </summary>
         /// <param name="entity">The AmpPages entity.</param>
-        public void UpdateAmpPages(AmpPages entity)
+        public void UpdateAmpPage(AmpPage entity)
         {
-            this.Provider.UpdateAmpPages(entity);
+            this.Provider.UpdateAmpPage(entity);
         }
 
         /// <summary>
         /// Deletes the AmpPages.
         /// </summary>
         /// <param name="entity">The AmpPages entity.</param>
-        public void DeleteAmpPages(AmpPages entity)
+        public void DeleteAmpPage(AmpPage entity)
         {
-            this.Provider.DeleteAmpPages(entity);
+            this.Provider.DeleteAmpPage(entity);
         }
 
         /// <summary>
@@ -134,18 +134,18 @@ namespace Telerik.Sitefinity.AMP
         /// </summary>
         /// <param name="id">The ID.</param>
         /// <returns>The AmpPages.</returns>
-        public AmpPages GetAmpPages(Guid id)
+        public AmpPage GetAmpPage(Guid id)
         {
-            return this.Provider.GetAmpPages(id);
+            return this.Provider.GetAmpPage(id);
         }
 
         /// <summary>
         /// Gets a query of all the AmpPages items.
         /// </summary>
         /// <returns>The AmpPages items.</returns>
-        public IQueryable<AmpPages> GetAmpPageses()
+        public IQueryable<AmpPage> GetAmpPages()
         {
-            return this.Provider.GetAmpPageses();
+            return this.Provider.GetAmpPages();
         }
         #endregion
     }

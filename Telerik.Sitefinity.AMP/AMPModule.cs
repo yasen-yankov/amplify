@@ -15,6 +15,7 @@ using Telerik.Sitefinity.Services;
 using Telerik.Sitefinity.Web.UI;
 using Telerik.Sitefinity.AMP.Configuration;
 using Telerik.Sitefinity.AMP.Web.UI.AmpPageses;
+using Telerik.Sitefinity.AMP.Web.Services;
 
 namespace Telerik.Sitefinity.AMP
 {
@@ -70,7 +71,8 @@ namespace Telerik.Sitefinity.AMP
                 .Module(settings.Name)
                     .Initialize()
                     .Localization<AMPResources>()
-                    .Configuration<AMPConfig>();
+                    .Configuration<AMPConfig>()
+                    .ServiceStackPlugin(new AmpServiceStackPlugin());
 
             // Here is also the place to register to some Sitefinity specific events like Bootstrapper.Initialized or subscribe for an event in with the EventHub class            
             // Please refer to the documentation for additional information http://www.sitefinity.com/documentation/documentationarticles/developers-guide/deep-dive/sitefinity-event-system/ieventservice-and-eventhub
@@ -336,7 +338,7 @@ namespace Telerik.Sitefinity.AMP
 
         internal static readonly Guid AmpPagesGroupPageId = new Guid("3e74a66b-e8c9-4420-9ceb-36810311a480");
         internal static readonly Guid AmpPagesHomePageId = new Guid("e8816474-4b2b-45a9-8e1d-9beda4f7dcd1");
-        public const string AmpPagesesWebServiceUrl = "Sitefinity/Services/AMP/AmpPagesesService.svc/";
+        public const string AmpPagesWebServiceUrl = "Sitefinity/Services/AMP/AmpPagesesService.svc/";
         #endregion
     }
 }
