@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Telerik.Sitefinity.AMP.Web.Services;
 using Telerik.Sitefinity.Web;
 using Telerik.Sitefinity.Web.UI;
 
@@ -102,10 +104,7 @@ namespace Telerik.Sitefinity.AMP.Web.UI
 		{
 			var currentNode = BackendSiteMap.FindSiteMapNode(AmpPagesPagesId, false);
 			this.AmpPagesPageUrlHiddenField.Value = RouteHelper.ResolveUrl(currentNode != null ? currentNode.Url : "~/Sitefinity", UrlResolveOptions.Rooted | UrlResolveOptions.RemoveTrailingSlash);
-			
-			//TODO: Uncomment the following when the service url is ready
-			this.AmpServiceUrlHiddenField.Value = "test-service-url";
-			//this.AmpPagesServiceUrlHiddenField.Value = VirtualPathUtility.ToAbsolute("~/RestApi/" + Telerik.Sitefinity.Packaging.Web.Services.PackagingServiceStackPlugin.AddonsRoute);
+			this.AmpServiceUrlHiddenField.Value = VirtualPathUtility.ToAbsolute("~/RestApi/" + AmpServiceStackPlugin.AmpPagesRoute);
 		}
 
 		internal Guid AmpPagesPagesId = Guid.Parse("3e74a66b-e8c9-4420-9ceb-36810311a480");

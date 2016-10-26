@@ -49,7 +49,7 @@
 
                     <script type="text/ng-template" id="ampPagesTree">
                               
-                        <td class="sfLarge">{{ampPage.Name}}</td>            
+                        <td class="sfLarge"><a href="#">{{ampPage.Title}}</a></td>            
                         <td class="sfShort">{{ampPage.Module}}</td>            
             
                                 
