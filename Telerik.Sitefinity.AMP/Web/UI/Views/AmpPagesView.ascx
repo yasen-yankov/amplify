@@ -29,7 +29,7 @@
 		                <span class="sfDecisionIcon"></span>
 	                </li>
                     <li class="sfCreateSubsequentItem">
-                        <asp:HyperLink ID="HyperLink1" runat="server" Target="_blank" Text=" See how to create amp pages." NavigateUrl="https://www.ampproject.org/docs/get_started/create"></asp:HyperLink>
+                        <asp:HyperLink ID="HyperLink1" runat="server" Target="_blank" Text="Create an amp page" NavigateUrl="/Sitefinity/Administration/AMP-AmpPages/Details"></asp:HyperLink>
                     </li>
                 </ol>
             </div>
@@ -65,11 +65,9 @@
 
 <script>
 		angular.module("AmpModule").value("ampServiceUrl", "<%= hdfAmpServiceUrl.Value%>");
-		angular.module("AmpModule").value("ampPagesPageUrl", "<%= hdfAmpPagesPageHyperLink.Value%>");
 </script>
 
 <asp:HiddenField runat="server" ID="hdfAmpServiceUrl" />
-<asp:HiddenField runat="server" ID="hdfAmpPagesPageHyperLink" />
 
 <script>
 		$(document).ready(function () {

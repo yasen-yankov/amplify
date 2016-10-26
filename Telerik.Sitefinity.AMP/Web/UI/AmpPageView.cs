@@ -1,16 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Web;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Telerik.Sitefinity.AMP.Web.Services;
+using Telerik.Sitefinity.Web;
 using Telerik.Sitefinity.Web.UI;
 
 namespace Telerik.Sitefinity.AMP.Web.UI
 {
-	/// <summary>
-	/// View used for listing all amp pages
-	/// </summary>
-	public class AmpPagesView : SimpleScriptView
+	public class AmpPageView : SimpleScriptView
 	{
 		#region Properties
 
@@ -22,7 +19,7 @@ namespace Telerik.Sitefinity.AMP.Web.UI
 			get
 			{
 				if (string.IsNullOrEmpty(base.LayoutTemplatePath))
-					base.LayoutTemplatePath = AmpPagesView.LayoutTemplatePathName;
+					base.LayoutTemplatePath = AmpPageView.LayoutTemplatePathName;
 				return base.LayoutTemplatePath;
 			}
 
@@ -40,10 +37,7 @@ namespace Telerik.Sitefinity.AMP.Web.UI
 		/// </remarks>
 		protected override string LayoutTemplateName
 		{
-			get
-			{
-				return null;
-			}
+			get { return null; }
 		}
 
 		#endregion
@@ -53,12 +47,14 @@ namespace Telerik.Sitefinity.AMP.Web.UI
 		/// <summary>
 		/// Gets the reference to the export types service URL hidden field
 		/// </summary>
-		protected HiddenField AmpServiceUrlHiddenField
+		//protected HiddenField AmpPageServiceUrlHiddenField
+		//{
+		//	get { return this.Container.GetControl<HiddenField>("hdfAddonsServiceUrl", true); }
+		//}
+
+		protected HiddenField AmpPageUrlHiddenField
 		{
-			get
-			{
-				return this.Container.GetControl<HiddenField>("hdfAmpServiceUrl", true);
-			}
+			get { return this.Container.GetControl<HiddenField>("", true); }
 		}
 
 		#endregion
@@ -82,17 +78,18 @@ namespace Telerik.Sitefinity.AMP.Web.UI
 		public override IEnumerable<ScriptReference> GetScriptReferences()
 		{
 			var scripts = new List<ScriptReference>();
-			scripts.Add(new ScriptReference(AmpPagesView.ScriptReference, typeof(AmpPagesView).Assembly.FullName));
+			scripts.Add(new ScriptReference(AmpPageView.ScriptReference, typeof(AmpPageView).Assembly.FullName));
 			return scripts;
 		}
 
 		/// <inheritdoc />
 		protected override void InitializeControls(GenericContainer container)
 		{
-			this.AmpServiceUrlHiddenField.Value = VirtualPathUtility.ToAbsolute("~/RestApi/" + AmpServiceStackPlugin.AmpPagesRoute);
+			//this.AmpPageServiceUrlHiddenField.Value =  VirtualPathUtility.ToAbsolute("~/RestApi/" + AmpServiceStackPlugin.AmpPageInsertRoute);
 		}
-		
-		internal const string ScriptReference = "Telerik.Sitefinity.AMP.Web.UI.Scripts.AmpPagesView.js";
-		private static readonly string LayoutTemplatePathName = "~/AMP/Telerik.Sitefinity.AMP.Web.UI.Views.AmpPagesView.ascx";
+
+		internal const string ScriptReference = "Telerik.Sitefinity.AMP.Web.UI.Scripts.AmpPageView.js";
+
+		private static readonly string LayoutTemplatePathName = "~/AMP/Telerik.Sitefinity.AMP.Web.UI.Views.AmpPageView.ascx";
 	}
 }

@@ -3,9 +3,8 @@
 
 		var ampModule = angular.module('AmpModule', []);
 
-		ampModule.controller("AmpController", ['$scope', 'AmpService', 'ampPagesPageUrl', function ($scope, AmpService, ampPagesPageUrl) {
+		ampModule.controller("AmpController", ['$scope', 'AmpService', function ($scope, AmpService) {
 				$scope.loading = true;
-				$scope.ampPagesPageUrl = ampPagesPageUrl;
 
 				AmpService.get().success(function (data) {
 						$scope.loading = false;

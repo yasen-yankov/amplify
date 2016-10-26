@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,11 +9,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Telerik.Sitefinity.AMP</RootNamespace>
     <AssemblyName>Telerik.Sitefinity.AMP</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <EnhancerAssembly>$(SolutionDir)packages\Telerik.DataAccess.Fluent.2016.2.822.1\tools\enhancer\enhancer.exe</EnhancerAssembly>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,7 +34,31 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-<<<<<<< HEAD
+    <Reference Include="AngleSharp">
+      <HintPath>..\ReferenceAssemblies\AngleSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetGuard">
+      <HintPath>..\ReferenceAssemblies\DotNetGuard.dll</HintPath>
+    </Reference>
+    <Reference Include="Html2Amp">
+      <HintPath>..\ReferenceAssemblies\Html2Amp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common">
+      <HintPath>..\packages\Ninject.Web.Common.3.2.3.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine">
+      <HintPath>..\packages\Sitefinity.RazorEngine.3.0.8.0\lib\net40\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorGenerator.Mvc">
+      <HintPath>..\packages\RazorGenerator.Mvc.2.3.12\lib\net40\RazorGenerator.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack">
       <HintPath>..\packages\ServiceStack.Signed.4.0.52\lib\net40\ServiceStack.dll</HintPath>
     </Reference>
@@ -48,26 +73,42 @@
     </Reference>
     <Reference Include="ServiceStack.Text">
       <HintPath>..\packages\ServiceStack.Text.Signed.4.0.52\lib\net40\ServiceStack.Text.dll</HintPath>
-=======
-    <Reference Include="AngleSharp">
-      <HintPath>..\ReferenceAssemblies\AngleSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="DotNetGuard">
-      <HintPath>..\ReferenceAssemblies\DotNetGuard.dll</HintPath>
-    </Reference>
-    <Reference Include="Html2Amp">
-      <HintPath>..\ReferenceAssemblies\Html2Amp.dll</HintPath>
->>>>>>> 08fa296f52df04db88fef465e8969e5f4e58c4da
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -85,11 +126,23 @@
     <Reference Include="Telerik.Sitefinity">
       <HintPath>..\packages\Telerik.Sitefinity.Core.9.2.6200.0\lib\net45\Telerik.Sitefinity.dll</HintPath>
     </Reference>
+    <Reference Include="Telerik.Sitefinity.Frontend">
+      <HintPath>..\packages\Telerik.Sitefinity.Feather.Core.1.7.600.0\lib\net45\Telerik.Sitefinity.Frontend.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Sitefinity.Frontend.Data">
+      <HintPath>..\packages\Telerik.Sitefinity.Feather.Core.1.7.600.0\lib\net45\Telerik.Sitefinity.Frontend.Data.dll</HintPath>
+    </Reference>
     <Reference Include="Telerik.Sitefinity.Model">
       <HintPath>..\packages\Telerik.Sitefinity.Core.9.2.6200.0\lib\net45\Telerik.Sitefinity.Model.dll</HintPath>
     </Reference>
+    <Reference Include="Telerik.Sitefinity.Mvc">
+      <HintPath>..\packages\Telerik.Sitefinity.Mvc.1.7.600.0\lib\net45\Telerik.Sitefinity.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Telerik.Sitefinity.Utilities">
       <HintPath>..\packages\Telerik.Sitefinity.Core.9.2.6200.0\lib\net45\Telerik.Sitefinity.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0.3\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -98,33 +151,57 @@
     <Compile Include="AMPModule.cs" />
     <Compile Include="AMPInstaller.cs" />
     <Compile Include="AMPResources.cs" />
+    <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="Configuration\AMPConfig.cs" />
     <Compile Include="Data\OpenAccess\AMPFluentMapping.cs" />
     <Compile Include="Data\OpenAccess\AMPOpenAccessDataProvider.cs" />
     <Compile Include="Data\OpenAccess\AMPStorageMetadataSource.cs" />
     <Compile Include="Models\AmpPage.cs" />
+    <Compile Include="Mvc\Controllers\AmpPageController.cs" />
+    <Compile Include="Mvc\Controllers\AmpPageDataModel.cs" />
+    <Compile Include="Mvc\HtmlHelpers\AmpComponentHtmlHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\Services\AmpServiceStackPlugin.cs" />
     <Compile Include="Web\Services\AmpWebService.cs" />
+    <Compile Include="Web\Services\Dto\AmpComponentDto.cs" />
     <Compile Include="Web\Services\Dto\AmpPageDto.cs" />
+    <Compile Include="Web\Services\Dto\AmpPageFieldDto.cs" />
     <Compile Include="Web\Services\Dto\AmpPageInsertRequest.cs" />
     <Compile Include="Web\Services\Dto\AmpPagesRequest.cs" />
     <Compile Include="Web\Services\Dto\AmpPageUpdateRequest.cs" />
     <Compile Include="Web\Services\Dto\AmpPageDeleteRequest.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="Web\Services\Dto\WrapperTagDto.cs" />
     <Compile Include="Web\UI\AmpPageses\AmpPagesesEmptyPage.cs" />
+>>>>>>> 800f18453d8cf1a7391889afe833fe1a399bb325
+    <Compile Include="Web\UI\AmpPagesView.cs" />
+    <Compile Include="Web\UI\AmpPageView.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+    <EmbeddedResource Include="Mvc\Views\AmpPage\Index.cshtml" />
+    <Content Include="Mvc\Views\Shared\readme.txt" />
+    <EmbeddedResource Include="Mvc\Views\Shared\_AMPLayout.cshtml" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="BasicSettings\readme.txt" />
     <Content Include="Configuration\readme.txt" />
     <Content Include="FieldControls\readme.txt" />
+    <Content Include="Mvc\Controllers\readme.txt" />
+    <Content Include="Mvc\Models\readme.txt" />
+    <Content Include="Mvc\Views\readme.txt" />
     <Content Include="Web\Scripts\readme.txt" />
-    <EmbeddedResource Include="Web\UI\AmpPageses\AmpPagesesEmptyPage.ascx">
+    <Content Include="Web\UI\readme.txt" />
+    <EmbeddedResource Include="Web\UI\Scripts\AmpPagesView.js" />
+    <EmbeddedResource Include="Web\UI\Views\AmpPagesView.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
-    <Content Include="Web\UI\readme.txt" />
+    <EmbeddedResource Include="Web\UI\Views\AmpPageView.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <Content Include="Web\UI\Scripts\AmpPageView.js" />
     <Content Include="Widgets\Form\readme.txt" />
     <Content Include="Widgets\Layout\readme.txt" />
     <Content Include="Widgets\Page\readme.txt" />

@@ -169,5 +169,37 @@ namespace Telerik.Sitefinity.AMP
             }
         }
         #endregion
-    }
+
+		#region AmpPage
+
+		[ResourceEntry("AmpPageTitle", Value = "Amp Page")]
+		public string AmpPageTitle
+		{
+			get
+			{
+				return this["AmpPageTitle"];
+			}
+		}
+
+		[ResourceEntry("AmpPageDescription", Value = "Amp Page Description")]
+		public string AmpPageDescription
+		{
+			get
+			{
+				return this["AmpPageDescription"];
+			}
+		}
+
+		[ResourceEntry("AmpPageUrl", Value = "Amp Page url")]
+		public string AmpPageUrl
+		{
+			get
+			{
+				return this["AmpPageUrl"];
+			}
+		}
+
+		#endregion
+
+	}
 }
