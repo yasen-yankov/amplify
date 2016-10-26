@@ -8,6 +8,11 @@ using Telerik.Sitefinity.Localization;
 using Telerik.Sitefinity.Modules.GenericContent.Configuration;
 using Telerik.Sitefinity.Web.Configuration;
 using Telerik.Sitefinity.AMP.Data.OpenAccess;
+using Telerik.Sitefinity.AMP.AmpComponents;
+using Telerik.Sitefinity.Modules.Blogs;
+using Telerik.Sitefinity.Modules.News;
+using Telerik.Sitefinity.Modules.Events;
+using Telerik.Sitefinity.Modules.Lists;
 
 namespace Telerik.Sitefinity.AMP.Configuration
 {
@@ -34,10 +39,12 @@ namespace Telerik.Sitefinity.AMP.Configuration
 		{
 			base.OnPropertiesInitialized();
 
-			this.EnabledBuiltInModues.Add(new ConfigValue<string>("Telerik.Sitefinity.Modules.Blogs.BlogsModule, Telerik.Sitefinity", this.EnabledBuiltInModues));
-			this.EnabledBuiltInModues.Add(new ConfigValue<string>("Telerik.Sitefinity.Modules.News.NewsModule, Telerik.Sitefinity", this.EnabledBuiltInModues));
-			this.EnabledBuiltInModues.Add(new ConfigValue<string>("Telerik.Sitefinity.Modules.Events.EventsModule, Telerik.Sitefinity", this.EnabledBuiltInModues));
-			this.EnabledBuiltInModues.Add(new ConfigValue<string>("Telerik.Sitefinity.Modules.Lists.ListsModule, Telerik.Sitefinity", this.EnabledBuiltInModues));
+			this.EnabledBuiltInModues.Add(new ConfigValue<string>(typeof(BlogsModule).AssemblyQualifiedName, this.EnabledBuiltInModues));
+			this.EnabledBuiltInModues.Add(new ConfigValue<string>(typeof(NewsModule).AssemblyQualifiedName, this.EnabledBuiltInModues));
+			this.EnabledBuiltInModues.Add(new ConfigValue<string>(typeof(EventsModule).AssemblyQualifiedName, this.EnabledBuiltInModues));
+			this.EnabledBuiltInModues.Add(new ConfigValue<string>(typeof(ListsModule).AssemblyQualifiedName, this.EnabledBuiltInModues));
+
+			this.AmpComponents.Add("Image", typeof(ImageAmpComponent).AssemblyQualifiedName);
 		}
 
         /// <summary>
@@ -70,5 +77,18 @@ namespace Telerik.Sitefinity.AMP.Configuration
 				this["enabledBuiltInModues"] = value;
 			}
 		}
-    }
+
+		[ConfigurationProperty("ampComponents")]
+		public ConfigValueDictionary AmpComponents
+		{
+			get
+			{
+				return (ConfigValueDictionary)this["ampComponents"];
+			}
+			set
+			{
+				this["ampComponents"] = value;
+			}
+		}
+	}
 }
