@@ -8,6 +8,6 @@
 </sf:ResourceLinks>
 
 <h1 class="sfBreadCrumb">
-    <asp:Literal ID="Literal1" runat="server" Text="Amp Page"></asp:Literal>
+    <asp:Literal ID="Literal1" runat="server" Text="Details"></asp:Literal>
 </h1>
 <div>Create/Details page</div>

@@ -8,7 +8,7 @@
 </sf:ResourceLinks>
 
 <h1 class="sfBreadCrumb">
-    <asp:Literal ID="Literal1" runat="server" Text="AMP Pages"></asp:Literal>
+    <asp:Literal ID="Literal1" runat="server" Text="Google AMP Pages"></asp:Literal>
 </h1>
 
 <div class="sfMain sfClearfix" ng-app="AmpModule" ng-cloak>

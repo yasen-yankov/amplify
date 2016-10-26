@@ -88,8 +88,6 @@ namespace Telerik.Sitefinity.AMP
             this.InstallVirtualPaths(initializer);
 
             this.InstallBackendPages(initializer);
-
-			this.AddAmpPagesNode(initializer);
         }
 
         /// <summary>
@@ -176,58 +174,33 @@ namespace Telerik.Sitefinity.AMP
         /// <param name="initializer">The initializer.</param>
         private void InstallBackendPages(SiteInitializer initializer)
         {
-            // Using our Fluent Api you can add your module backend pages hierarchy in no time
-            // Here is an example using resources to localize the title of the page and adding a dummy control
-            // to the module page. 
-
-            //Guid groupPageId = new Guid("2f09ece0-683c-4735-b313-06d4c3a3b7d6");
-            //Guid pageId = new Guid("2161c928-2120-4287-af52-349c3a2327d7");
-
-            //initializer.Installer
-            //    .CreateModuleGroupPage(groupPageId, "AMP group page")
-            //        .PlaceUnder(SiteInitializer.SitefinityNodeId)
-            //        .SetOrdinal(100)
-            //        .LocalizeUsing<AMPResources>()
-            //        .SetTitleLocalized("AMPGroupPageTitle")
-            //        .SetUrlNameLocalized("AMPGroupPageUrlName")
-            //        .SetDescriptionLocalized("AMPGroupPageDescription")
-            //        .ShowInNavigation()
-            //        .AddChildPage(pageId, "AMP page")
-            //            .SetOrdinal(1)
-            //            .LocalizeUsing<AMPResources>()
-            //            .SetTitleLocalized("AMPPageTitle")
-            //            .SetHtmlTitleLocalized("AMPPageTitle")
-            //            .SetUrlNameLocalized("AMPPageUrlName")
-            //            .SetDescriptionLocalized("AMPPageDescription")
-            //            .AddControl(new System.Web.UI.WebControls.Literal()
-            //            {
-            //                Text = "<h1 class=\"sfBreadCrumb\">AMP module Installed</h1>",
-            //                Mode = LiteralMode.PassThrough
-            //            })
-            //            .ShowInNavigation()
-            //        .Done()
-            //    .Done();
-
-			//initializer.Installer 
-			//	.CreateModuleGroupPage(AMPModule.AmpPagesGroupPageId, "AmpPages")
-			//		.PlaceUnder(CommonNode.TypesOfContent)
-			//		.LocalizeUsing<AMPResources>()
-			//		.SetTitleLocalized("AmpPagesGroupPageTitle")
-			//		.SetUrlNameLocalized("AmpPagesGroupPageUrlName")
-			//		.SetDescriptionLocalized("AmpPagesGroupPageDescription")
-			//		.ShowInNavigation()
-			//		.AddChildPage(AMPModule.AmpPagesHomePageId, "AmpPagesMaster")
-			//			.LocalizeUsing<AMPResources>()
-			//			.SetTitleLocalized("AmpPagesGroupPageTitle")
-			//			.SetHtmlTitleLocalized("AmpPagesGroupPageTitle")
-			//			.SetUrlNameLocalized("AmpPagesMasterPageUrl")
-			//			.SetDescriptionLocalized("AmpPagesGroupPageDescription")
-			//			.AddControl(new AmpPagesesEmptyPage())
-			//			.HideFromNavigation()
-			//		.Done()
-			//	.Done();
-
-			
+            initializer.Installer
+				.CreateModuleGroupPage(AMPModule.AmpPagesGroupPageId, "AmpPages")
+					.PlaceUnder(CommonNode.Design)
+					.LocalizeUsing<AMPResources>()
+					.SetTitleLocalized("AmpPagesGroupPageTitle")
+					.SetUrlNameLocalized("AmpPagesGroupPageUrlName")
+					.SetDescriptionLocalized("AmpPagesGroupPageDescription")
+					.ShowInNavigation()
+					.AddChildPage(AMPModule.AmpPagesHomePageId, "Amp pages")
+						.LocalizeUsing<AMPResources>()
+						.SetTitleLocalized("AmpPagesGroupPageTitle")
+						.SetHtmlTitleLocalized("AmpPagesGroupPageTitle")
+						.SetUrlNameLocalized("AmpPagesMasterPageUrl")
+						.SetDescriptionLocalized("AmpPagesGroupPageDescription")
+						.AddControl(new AmpPagesView())
+						.HideFromNavigation()
+						.Done()
+					.AddChildPage(AMPModule.AmpPageDetailPageId, "Amp page")
+						.LocalizeUsing<AMPResources>()
+						.SetTitleLocalized("AmpPageTitle")
+						.SetDescriptionLocalized("AmpPageDescription")
+						.SetUrlNameLocalized("AmpPageUrl")
+						.SetTemplate(SiteInitializer.BackendHtml5TemplateId)
+						.AddControl(new AmpPageView())
+						.HideFromNavigation()
+						.Done()
+				.Done();
         }
         #endregion
 
@@ -324,37 +297,6 @@ namespace Telerik.Sitefinity.AMP
 
         #region Upgrade methods
         #endregion
-
-		private void AddAmpPagesNode(SiteInitializer initializer)
-		{
-			initializer.Installer
-				.CreateModuleGroupPage(AMPModule.AmpPagesGroupPageId, "AmpPages")
-					.PlaceUnder(CommonNode.Design)
-					.LocalizeUsing<AMPResources>()
-					.SetTitleLocalized("AmpPagesGroupPageTitle")
-					.SetUrlNameLocalized("AmpPagesGroupPageUrlName")
-					.SetDescriptionLocalized("AmpPagesGroupPageDescription")
-					.ShowInNavigation()
-					.AddChildPage(AMPModule.AmpPagesHomePageId, "Amp pages")
-						.LocalizeUsing<AMPResources>()
-						.SetTitleLocalized("AmpPagesGroupPageTitle")
-						.SetHtmlTitleLocalized("AmpPagesGroupPageTitle")
-						.SetUrlNameLocalized("AmpPagesMasterPageUrl")
-						.SetDescriptionLocalized("AmpPagesGroupPageDescription")
-						.AddControl(new AmpPagesView())
-						.HideFromNavigation()
-						.Done()
-					.AddChildPage(AMPModule.AmpPageDetailPageId, "Amp page")
-						.LocalizeUsing<AMPResources>()
-						.SetTitleLocalized("AmpPageTitle")
-						.SetDescriptionLocalized("AmpPageDescription")
-						.SetUrlNameLocalized("AmpPageUrl")
-						.SetTemplate(SiteInitializer.BackendHtml5TemplateId)
-						.AddControl(new AmpPageView())
-						.HideFromNavigation()
-						.Done()
-				.Done();
-		}
 
         #region Private members & constants
         public const string ModuleName = "AMP";
