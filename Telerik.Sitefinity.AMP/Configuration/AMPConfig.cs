@@ -30,6 +30,16 @@ namespace Telerik.Sitefinity.AMP.Configuration
             });
         }
 
+		protected override void OnPropertiesInitialized()
+		{
+			base.OnPropertiesInitialized();
+
+			this.EnabledBuiltInModues.Add(new ConfigValue<string>("Telerik.Sitefinity.Modules.Blogs.BlogsModule, Telerik.Sitefinity", this.EnabledBuiltInModues));
+			this.EnabledBuiltInModues.Add(new ConfigValue<string>("Telerik.Sitefinity.Modules.News.NewsModule, Telerik.Sitefinity", this.EnabledBuiltInModues));
+			this.EnabledBuiltInModues.Add(new ConfigValue<string>("Telerik.Sitefinity.Modules.Events.EventsModule, Telerik.Sitefinity", this.EnabledBuiltInModues));
+			this.EnabledBuiltInModues.Add(new ConfigValue<string>("Telerik.Sitefinity.Modules.Lists.ListsModule, Telerik.Sitefinity", this.EnabledBuiltInModues));
+		}
+
         /// <summary>
         /// Gets or sets the name of the default data provider. 
         /// </summary>
@@ -47,5 +57,18 @@ namespace Telerik.Sitefinity.AMP.Configuration
             }
         }
 	    #endregion
+
+		[ConfigurationProperty("enabledBuiltInModues")]
+		public ConfigElementList<ConfigValue<string>> EnabledBuiltInModues
+		{
+			get
+			{
+				return (ConfigElementList<ConfigValue<string>>)this["enabledBuiltInModues"];
+			}
+			set
+			{
+				this["enabledBuiltInModues"] = value;
+			}
+		}
     }
 }
