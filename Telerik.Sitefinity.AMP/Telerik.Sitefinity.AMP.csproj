@@ -13,6 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <EnhancerAssembly>$(SolutionDir)packages\Telerik.DataAccess.Fluent.2016.2.822.1\tools\enhancer\enhancer.exe</EnhancerAssembly>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,6 +33,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AngleSharp">
+      <HintPath>..\ReferenceAssemblies\AngleSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetGuard">
+      <HintPath>..\ReferenceAssemblies\DotNetGuard.dll</HintPath>
+    </Reference>
+    <Reference Include="Html2Amp">
+      <HintPath>..\ReferenceAssemblies\Html2Amp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
