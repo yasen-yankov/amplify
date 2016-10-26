@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Telerik.Sitefinity.AMP.Web.Services.Dto
 {
@@ -36,8 +37,8 @@ namespace Telerik.Sitefinity.AMP.Web.Services.Dto
         public Guid PageId { get; set; }
 
         /// <summary>
-        /// Gets or sets the FieldsListJSON.
+        /// Gets or sets the Fields list.
         /// </summary>
-        public string FieldsListJson { get; set; }
+        public IList<AmpPageFieldDto> Fields { get; set; }
     }
 }

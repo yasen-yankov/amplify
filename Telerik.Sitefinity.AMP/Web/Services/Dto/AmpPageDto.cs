@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ServiceStack.Text;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using Telerik.Sitefinity.AMP.Models;
 
@@ -19,6 +21,10 @@ namespace Telerik.Sitefinity.AMP.Web.Services.Dto
 
             this.Id = ampPage.Id;
             this.Title = ampPage.Title;
+            this.ItemType = ampPage.ItemType;
+            this.PageId = ampPage.PageId;
+            this.Fields = JsonSerializer.DeserializeFromString<IList<AmpPageFieldDto>>(ampPage.FieldsListJson);
+            this.UrlName = ampPage.UrlName;
         }
 
         public AmpPageDto(AmpPageInsertRequest ampPageInsertRequest)
@@ -31,7 +37,7 @@ namespace Telerik.Sitefinity.AMP.Web.Services.Dto
             this.Title = ampPageInsertRequest.Title;
             this.ItemType = ampPageInsertRequest.ItemType;
             this.PageId = ampPageInsertRequest.PageId;
-            this.FieldsListJson = ampPageInsertRequest.FieldsListJson;
+            this.Fields = ampPageInsertRequest.Fields;
             this.UrlName = ampPageInsertRequest.UrlName;
         }
 
@@ -46,7 +52,7 @@ namespace Telerik.Sitefinity.AMP.Web.Services.Dto
             this.Title = ampPageUpdateRequest.Title;
             this.ItemType = ampPageUpdateRequest.ItemType;
             this.PageId = ampPageUpdateRequest.PageId;
-            this.FieldsListJson = ampPageUpdateRequest.FieldsListJson;
+            this.Fields = ampPageUpdateRequest.Fields;
             this.UrlName = ampPageUpdateRequest.UrlName;
         }
 
@@ -55,7 +61,7 @@ namespace Telerik.Sitefinity.AMP.Web.Services.Dto
             ampPage.Title = this.Title;
             ampPage.ItemType = this.ItemType;
             ampPage.PageId = this.PageId;
-            ampPage.FieldsListJson = this.FieldsListJson;
+            ampPage.FieldsListJson = JsonSerializer.SerializeToString<IList<AmpPageFieldDto>>(this.Fields);
             ampPage.UrlName = this.UrlName;
         }
 
@@ -86,8 +92,8 @@ namespace Telerik.Sitefinity.AMP.Web.Services.Dto
         public Guid PageId { get; set; }
 
         /// <summary>
-        /// Gets or sets the FieldsListJSON.
+        /// Gets or sets the Fields list.
         /// </summary>
-        public string FieldsListJson { get; set; }
+        public IList<AmpPageFieldDto> Fields { get; set; }
     }
 }
