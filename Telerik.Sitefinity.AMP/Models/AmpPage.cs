@@ -1,28 +1,25 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Telerik.OpenAccess;
 using Telerik.Sitefinity.Model;
 
 namespace Telerik.Sitefinity.AMP.Models
 {
-    public class AmpPages : IDataItem
+    public class AmpPage : IDataItem
     {
         #region Construction
         /// <summary>
-        /// Initializes a new instance of the <see cref="AmpPages" /> class.
+        /// Initializes a new instance of the <see cref="AmpPage" /> class.
         /// </summary>
-        public AmpPages()
+        public AmpPage()
         {
         }
         
         /// <summary>
-        /// Initializes a new instance of the <see cref="AmpPages" /> class.
+        /// Initializes a new instance of the <see cref="AmpPage" /> class.
         /// </summary>
         /// <param name="id">The AmpPages ID.</param>
         /// <param name="applicationName">Name of the application.</param>
-        public AmpPages(Guid id, string applicationName)
+        public AmpPage(Guid id, string applicationName)
         {
             this.Id = id;
             this.ApplicationName = applicationName;

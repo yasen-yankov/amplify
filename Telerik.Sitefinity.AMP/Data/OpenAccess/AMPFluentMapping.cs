@@ -1,13 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Telerik.OpenAccess;
-using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Metadata.Fluent;
-using Telerik.Sitefinity;
-using Telerik.Sitefinity.Model;
 using Telerik.Sitefinity.AMP.Models;
+using Telerik.Sitefinity.Model;
 
 namespace Telerik.Sitefinity.AMP.Data.OpenAccess
 {
@@ -53,16 +49,16 @@ namespace Telerik.Sitefinity.AMP.Data.OpenAccess
         /// <param name="mappings">The mappings.</param>
         private void MapAmpPageses(List<MappingConfiguration> mappings)
         {
-            var mapping = new MappingConfiguration<AmpPages>();
+            var mapping = new MappingConfiguration<AmpPage>();
             
-			mapping.MapType(p => new { }).SetTableName("AMP_AmpPageses", this.Context);			
+			mapping.MapType(p => new { }).SetTableName("AMP_AmpPages", this.Context);
 				
 			mapping.HasProperty(p => p.Id).IsIdentity().IsNotNullable();
 			mapping.HasProperty(p => p.Title).IsNotNullable().IsText(this.Context, 255);
 			mapping.HasProperty(p => p.ModuleType).IsText(this.Context, 255);
-           mapping.HasProperty(p => p.ApplicationName);
+            mapping.HasProperty(p => p.ApplicationName);
             mapping.HasProperty(p => p.LastModified);
-            mapping.HasProperty(p => p.DateCreated);   	
+            mapping.HasProperty(p => p.DateCreated);
 				
             mappings.Add(mapping);
         }

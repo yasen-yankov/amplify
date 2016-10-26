@@ -1161,7 +1161,9 @@
     <Content Include="SampleTemplate.cshtml">
       <Generator>RazorGenerator</Generator>
     </Content>
-    <Content Include="App_Data\Sitefinity\Configuration\DataConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\DataConfig.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Sitefinity\Configuration\DigitalExperienceCloudConnectorConfig.config" />
     <Content Include="App_Data\Sitefinity\Configuration\PersonalizationConfig.config" />
     <Content Include="App_Data\Sitefinity\Configuration\ProjectConfig.config">
