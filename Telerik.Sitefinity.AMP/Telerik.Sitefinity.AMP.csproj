@@ -111,8 +111,8 @@
     <Compile Include="Web\Services\Dto\AmpPagesRequest.cs" />
     <Compile Include="Web\Services\Dto\AmpPageUpdateRequest.cs" />
     <Compile Include="Web\Services\Dto\AmpPageDeleteRequest.cs" />
-    <Compile Include="Web\UI\AmpPageses\AmpPagesesEmptyPage.cs" />
     <Compile Include="Web\UI\AmpPagesView.cs" />
+    <Compile Include="Web\UI\AmpPageView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -122,14 +122,15 @@
     <Content Include="Configuration\readme.txt" />
     <Content Include="FieldControls\readme.txt" />
     <Content Include="Web\Scripts\readme.txt" />
-    <EmbeddedResource Include="Web\UI\AmpPageses\AmpPagesesEmptyPage.ascx">
-      <SubType>ASPXCodeBehind</SubType>
-    </EmbeddedResource>
     <Content Include="Web\UI\readme.txt" />
     <EmbeddedResource Include="Web\UI\Scripts\AmpPagesView.js" />
     <EmbeddedResource Include="Web\UI\Views\AmpPagesView.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Web\UI\Views\AmpPageView.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <Content Include="Web\UI\Scripts\AmpPageView.js" />
     <Content Include="Widgets\Form\readme.txt" />
     <Content Include="Widgets\Layout\readme.txt" />
     <Content Include="Widgets\Page\readme.txt" />

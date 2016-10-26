@@ -354,6 +354,15 @@ namespace Telerik.Sitefinity.AMP
 						.AddControl(new AmpPagesView())
 						.HideFromNavigation()
 					.Done()
+					.AddChildPage(AMPModule.AmpPageDetailPageId, "Amp page")
+						   .LocalizeUsing<AMPResources>()
+						   .SetTitleLocalized("AmpPageTitle")
+						   .SetDescriptionLocalized("AmpPageDescription")
+						   .SetUrlNameLocalized("AmpPageUrl")
+						   .SetTemplate(SiteInitializer.BackendHtml5TemplateId)
+						   .AddControl(new AmpPageView())
+						   .HideFromNavigation()
+						   .Done()
 				.Done();
 		}
 
@@ -371,6 +380,7 @@ namespace Telerik.Sitefinity.AMP
 
         internal static readonly Guid AmpPagesGroupPageId = new Guid("3e74a66b-e8c9-4420-9ceb-36810311a480");
         internal static readonly Guid AmpPagesHomePageId = new Guid("e8816474-4b2b-45a9-8e1d-9beda4f7dcd1");
+		internal static readonly Guid AmpPageDetailPageId = new Guid("ceeaa11e-1334-4444-9494-60d92aa02ef6");
         public const string AmpPagesWebServiceUrl = "Sitefinity/Services/AMP/AmpPagesesService.svc/";
         #endregion
     }

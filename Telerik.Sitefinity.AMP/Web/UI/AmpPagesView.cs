@@ -108,6 +108,7 @@ namespace Telerik.Sitefinity.AMP.Web.UI
 		}
 
 		internal Guid AmpPagesPagesId = Guid.Parse("3e74a66b-e8c9-4420-9ceb-36810311a480");
+		
 		internal const string ScriptReference = "Telerik.Sitefinity.AMP.Web.UI.Scripts.AmpPagesView.js";
 		private static readonly string LayoutTemplatePathName = "~/AMP/Telerik.Sitefinity.AMP.Web.UI.Views.AmpPagesView.ascx";
 	}

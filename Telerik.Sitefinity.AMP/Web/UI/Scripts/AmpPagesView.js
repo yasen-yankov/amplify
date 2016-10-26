@@ -3,7 +3,7 @@
 
 		var ampModule = angular.module('AmpModule', []);
 
-		ampModule.controller("AmpController", ['$scope', 'AmpService', 'ampPagesPageUrl', function ($scope, AmpService, ampPagesPageUrl) {
+		ampModule.controller("AmpController", ['$scope', '$location', '$routeParams', 'AmpService', 'ampPagesPageUrl', function ($scope, $location, $routeParams, AmpService, ampPagesPageUrl) {
 				$scope.loading = true;
 				$scope.ampPagesPageUrl = ampPagesPageUrl;
 
@@ -11,6 +11,14 @@
 						$scope.loading = false;
 						$scope.ampPages = data;
 				});
+
+				$scope.loadCreatePage = function () {
+						$location.path('/Sitefinity/Administration/AMP-AmpPages/Details/' + $routeParams.id);
+				};
+
+				$scope.cancel = function() {
+						$location.path('/Sitefinity/Administration/AMP-AmpPages');
+				}
 		}]);
 
 		ampModule.factory('AmpService', ['$http', 'ampServiceUrl', function ($http, ampServiceUrl) {
