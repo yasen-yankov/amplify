@@ -1,0 +1,15 @@
+﻿@{
+	Layout = "~/Mvc/Views/Shared/_AMPLayout.cshtml";
+}
+@using SitefinityWebApp.Mvc.HtmlHelpers;
+
+@model SitefinityWebApp.Mvc.Controllers.AmpPageViewModel
+
+@{
+    ViewBag.Title2 = "Index";
+}
+
+@foreach (var field in Model.Fields)
+{
+	@Html.WrapperTag(Html.AmpHtml(Model.DataItem, field.FieldName, field.AmpComponent), field.WrapperTag)
+}
