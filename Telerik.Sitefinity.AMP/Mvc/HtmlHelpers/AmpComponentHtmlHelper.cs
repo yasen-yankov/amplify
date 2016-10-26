@@ -33,11 +33,19 @@ namespace SitefinityWebApp.Mvc.HtmlHelpers
 			{
 				DynamicLinksParser dynamicLinksParser = new DynamicLinksParser(false);
 				fieldValue = dynamicLinksParser.Apply(fieldValue.ToString());
-				
-				fieldValue = ampConverter.Value.ConvertFromHtml(fieldValue.ToString());
 			}
 
-			return htmlHelper.Raw(fieldValue);
+			string ampHtml = string.Empty;
+			if (ampComponent == null)
+			{
+				ampHtml = ampConverter.Value.ConvertFromHtml(fieldValue.ToString());
+			}
+			else
+			{
+				// Amp component
+			}
+
+			return htmlHelper.Raw(ampHtml);
 		}
 
 		public static IHtmlString WrapperTag(this HtmlHelper htmlHelper, string html, WrapperTagModel wrapperTag)
