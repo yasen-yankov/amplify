@@ -11,6 +11,7 @@ using Telerik.Sitefinity.AMP.AmpComponents;
 using Telerik.Sitefinity.Model;
 using Telerik.Sitefinity.Modules.GenericContent;
 using Telerik.Sitefinity.Services;
+using Telerik.Sitefinity.Web;
 using Telerik.Sitefinity.Web.Utilities;
 
 namespace SitefinityWebApp.Mvc.HtmlHelpers
@@ -23,7 +24,7 @@ namespace SitefinityWebApp.Mvc.HtmlHelpers
 		{
 			return new HtmlToAmpConverter().WithConfiguration(new RunConfiguration
 			{
-				RelativeUrlsHost = "http://localhost"
+				RelativeUrlsHost = SystemManager.CurrentContext.CurrentSite.GetUri().AbsoluteUri
 			});
 		}
 
