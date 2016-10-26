@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Telerik.Sitefinity.AMP.Web.Services.Dto;
+using Telerik.Sitefinity.AMP.AmpComponents;
 using Telerik.Sitefinity.Model;
 using Telerik.Sitefinity.Modules.GenericContent;
 using Telerik.Sitefinity.Services;
@@ -43,7 +44,9 @@ namespace SitefinityWebApp.Mvc.HtmlHelpers
 			}
 			else
 			{
-				// Amp component
+				var componentType = Type.GetType(ampComponent.ComponentType);
+				var ampComponentGenerator = (IAmpComponent)Activator.CreateInstance(componentType);
+				ampHtml = ampComponentGenerator.Generate(fieldValue);
 			}
 
 			return htmlHelper.Raw(ampHtml);
