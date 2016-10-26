@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SitefinityWebApp", "SitefinityWebApp\SitefinityWebApp.csproj", "{3E598CFC-83B2-494A-A97F-32EB24D797C6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telerik.Sitefinity.AMP", "Telerik.Sitefinity.AMP\Telerik.Sitefinity.AMP.csproj", "{EAE98B29-A920-441C-A652-6642BCF43B05}"
@@ -12,13 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A5A46A
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReferenceAssemblies", "ReferenceAssemblies", "{71210DFE-F650-443E-B68B-835EB93700C4}"
-	ProjectSection(SolutionItems) = preProject
-		ReferenceAssemblies\AngleSharp.dll = ReferenceAssemblies\AngleSharp.dll
-		ReferenceAssemblies\DotNetGuard.dll = ReferenceAssemblies\DotNetGuard.dll
-		ReferenceAssemblies\Html2Amp.dll = ReferenceAssemblies\Html2Amp.dll
 	EndProjectSection
 EndProject
 Global

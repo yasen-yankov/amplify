@@ -99,9 +99,24 @@ namespace Telerik.Sitefinity.AMP.Models
         public string Title { get; set; }
 
         /// <summary>
+        /// Gets or sets the UrlName.
+        /// </summary>
+        public string UrlName { get; set; }
+
+        /// <summary>
         /// Gets or sets the ModuleType.
         /// </summary>
-        public string ModuleType { get; set; }
+        public string ItemType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the PageId.
+        /// </summary>
+        public Guid PageId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the FieldsListJSON.
+        /// </summary>
+        public string FieldsListJson { get; set; }
 
         #endregion
         

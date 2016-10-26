@@ -4,6 +4,7 @@ using System.Linq;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.Sitefinity.AMP.Models;
 using Telerik.Sitefinity.Model;
+using Telerik.OpenAccess.Metadata.Fluent.Advanced;
 
 namespace Telerik.Sitefinity.AMP.Data.OpenAccess
 {
@@ -55,10 +56,17 @@ namespace Telerik.Sitefinity.AMP.Data.OpenAccess
 				
 			mapping.HasProperty(p => p.Id).IsIdentity().IsNotNullable();
 			mapping.HasProperty(p => p.Title).IsNotNullable().IsText(this.Context, 255);
-			mapping.HasProperty(p => p.ModuleType).IsText(this.Context, 255);
+			mapping.HasProperty(p => p.ItemType).IsText(this.Context, 255);
+            mapping.HasProperty(p => p.UrlName).IsText(this.Context, 255);
+            mapping.HasProperty(p => p.PageId);
+            mapping.HasProperty(p => p.FieldsListJson).IsNullable().WithInfiniteLength();
             mapping.HasProperty(p => p.ApplicationName);
             mapping.HasProperty(p => p.LastModified);
             mapping.HasProperty(p => p.DateCreated);
+
+            mapping.HasIndex(p => p.Title).IsUnique().WithName("idx_title");
+            mapping.HasIndex(p => p.UrlName).IsUnique().WithName("idx_urlName");
+            mapping.HasIndex(p => p.PageId).IsUnique().WithName("idx_pageId");
 				
             mappings.Add(mapping);
         }
