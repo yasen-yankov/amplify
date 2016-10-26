@@ -1164,7 +1164,9 @@
     <Content Include="App_Data\Sitefinity\Configuration\DataConfig.config" />
     <Content Include="App_Data\Sitefinity\Configuration\DigitalExperienceCloudConnectorConfig.config" />
     <Content Include="App_Data\Sitefinity\Configuration\PersonalizationConfig.config" />
-    <Content Include="App_Data\Sitefinity\Configuration\ProjectConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\ProjectConfig.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Sitefinity\Configuration\SecurityConfig.config" />
     <Content Include="App_Data\Sitefinity\Configuration\SystemConfig.config" />
     <Content Include="App_Data\Sitefinity\Sitefinity.lic" />

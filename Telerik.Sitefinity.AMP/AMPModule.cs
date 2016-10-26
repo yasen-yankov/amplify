@@ -15,6 +15,7 @@ using Telerik.Sitefinity.Services;
 using Telerik.Sitefinity.Web.UI;
 using Telerik.Sitefinity.AMP.Configuration;
 using Telerik.Sitefinity.AMP.Web.UI.AmpPageses;
+using Telerik.Sitefinity.AMP.Web.UI;
 
 namespace Telerik.Sitefinity.AMP
 {
@@ -95,6 +96,8 @@ namespace Telerik.Sitefinity.AMP
             this.InstallVirtualPaths(initializer);
 
             this.InstallBackendPages(initializer);
+
+			this.AddAmpPagesNode(initializer);
         }
 
         /// <summary>
@@ -213,24 +216,26 @@ namespace Telerik.Sitefinity.AMP
             //        .Done()
             //    .Done();
 
-            initializer.Installer 
-                .CreateModuleGroupPage(AMPModule.AmpPagesGroupPageId, "AmpPages")
-                    .PlaceUnder(CommonNode.TypesOfContent)
-                    .LocalizeUsing<AMPResources>()
-                    .SetTitleLocalized("AmpPagesGroupPageTitle")
-                    .SetUrlNameLocalized("AmpPagesGroupPageUrlName")
-                    .SetDescriptionLocalized("AmpPagesGroupPageDescription")
-                    .ShowInNavigation()
-                    .AddChildPage(AMPModule.AmpPagesHomePageId, "AmpPagesMaster")
-                        .LocalizeUsing<AMPResources>()
-                        .SetTitleLocalized("AmpPagesGroupPageTitle")
-                        .SetHtmlTitleLocalized("AmpPagesGroupPageTitle")
-                        .SetUrlNameLocalized("AmpPagesMasterPageUrl")
-                        .SetDescriptionLocalized("AmpPagesGroupPageDescription")
-                        .AddControl(new AmpPagesesEmptyPage())
-                        .HideFromNavigation()
-                    .Done()
-                .Done();
+			//initializer.Installer 
+			//	.CreateModuleGroupPage(AMPModule.AmpPagesGroupPageId, "AmpPages")
+			//		.PlaceUnder(CommonNode.TypesOfContent)
+			//		.LocalizeUsing<AMPResources>()
+			//		.SetTitleLocalized("AmpPagesGroupPageTitle")
+			//		.SetUrlNameLocalized("AmpPagesGroupPageUrlName")
+			//		.SetDescriptionLocalized("AmpPagesGroupPageDescription")
+			//		.ShowInNavigation()
+			//		.AddChildPage(AMPModule.AmpPagesHomePageId, "AmpPagesMaster")
+			//			.LocalizeUsing<AMPResources>()
+			//			.SetTitleLocalized("AmpPagesGroupPageTitle")
+			//			.SetHtmlTitleLocalized("AmpPagesGroupPageTitle")
+			//			.SetUrlNameLocalized("AmpPagesMasterPageUrl")
+			//			.SetDescriptionLocalized("AmpPagesGroupPageDescription")
+			//			.AddControl(new AmpPagesesEmptyPage())
+			//			.HideFromNavigation()
+			//		.Done()
+			//	.Done();
+
+			
         }
         #endregion
 
@@ -322,10 +327,33 @@ namespace Telerik.Sitefinity.AMP
             //        .Done()
             //    .Done();
         }
+
         #endregion
 
         #region Upgrade methods
         #endregion
+
+		private void AddAmpPagesNode(SiteInitializer initializer)
+		{
+			initializer.Installer
+				.CreateModuleGroupPage(AMPModule.AmpPagesGroupPageId, "AmpPages")
+					.PlaceUnder(CommonNode.Administration)
+					.LocalizeUsing<AMPResources>()
+					.SetTitleLocalized("AmpPagesGroupPageTitle")
+					.SetUrlNameLocalized("AmpPagesGroupPageUrlName")
+					.SetDescriptionLocalized("AmpPagesGroupPageDescription")
+					.ShowInNavigation()
+					.AddChildPage(AMPModule.AmpPagesHomePageId, "Amp pages")
+						.LocalizeUsing<AMPResources>()
+						.SetTitleLocalized("AmpPagesGroupPageTitle")
+						.SetHtmlTitleLocalized("AmpPagesGroupPageTitle")
+						.SetUrlNameLocalized("AmpPagesMasterPageUrl")
+						.SetDescriptionLocalized("AmpPagesGroupPageDescription")
+						.AddControl(new AmpPagesView())
+						.HideFromNavigation()
+					.Done()
+				.Done();
+		}
 
         #region Private members & constants
         public const string ModuleName = "AMP";
@@ -333,6 +361,11 @@ namespace Telerik.Sitefinity.AMP
         internal const string ModuleDescription = "This is a Custom Module which has been built with Sitefinity Thunder.";
         internal const string ModuleVirtualPath = "~/AMP/";
         private static readonly Type[] managerTypes = new Type[] { typeof(AMPManager) };
+
+
+		//TODO: Check if this is the correct id. If it's the same as in AmpPagesView, move it to common place
+		internal Guid AmpPagesPagesId = Guid.Parse("3e74a66b-e8c9-4420-9ceb-36810311a480");
+		internal Guid ModuleNodeId = Guid.Parse("da18dcb8-0480-4969-9dde-caa496b869ab");
 
         internal static readonly Guid AmpPagesGroupPageId = new Guid("3e74a66b-e8c9-4420-9ceb-36810311a480");
         internal static readonly Guid AmpPagesHomePageId = new Guid("e8816474-4b2b-45a9-8e1d-9beda4f7dcd1");
