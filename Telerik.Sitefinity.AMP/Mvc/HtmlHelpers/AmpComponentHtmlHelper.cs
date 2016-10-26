@@ -13,6 +13,7 @@ using Telerik.Sitefinity.Modules.GenericContent;
 using Telerik.Sitefinity.Services;
 using Telerik.Sitefinity.Web;
 using Telerik.Sitefinity.Web.Utilities;
+using Telerik.Sitefinity.RelatedData;
 
 namespace SitefinityWebApp.Mvc.HtmlHelpers
 {
@@ -31,6 +32,11 @@ namespace SitefinityWebApp.Mvc.HtmlHelpers
 		public static IHtmlString AmpHtml(this HtmlHelper htmlHelper, IDataItem dataItem, string fieldName, AmpComponentDto ampComponent)
 		{
 			object fieldValue = ((IDynamicFieldsContainer)dataItem).GetValue(fieldName);
+
+			if (fieldValue == null)
+			{
+				fieldValue = dataItem.GetRelatedItems(fieldName);
+			}
 
 			if (fieldValue is string || fieldValue is Lstring)
 			{
