@@ -1,4 +1,5 @@
-﻿using SitefinityWebApp.Mvc.Controllers;
+﻿using Html2Amp;
+using SitefinityWebApp.Mvc.Controllers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,12 +8,23 @@ using System.Web;
 using System.Web.Mvc;
 using Telerik.Sitefinity.Model;
 using Telerik.Sitefinity.Modules.GenericContent;
+using Telerik.Sitefinity.Services;
 using Telerik.Sitefinity.Web.Utilities;
 
 namespace SitefinityWebApp.Mvc.HtmlHelpers
 {
 	public static class AmpComponentHtmlHelper
 	{
+		private static readonly Lazy<HtmlToAmpConverter> ampConverter = new Lazy<HtmlToAmpConverter>(InitializeConverter);
+
+		private static HtmlToAmpConverter InitializeConverter()
+		{
+			return new HtmlToAmpConverter().WithConfiguration(new RunConfiguration
+			{
+				RelativeUrlsHost = "http://localhost"
+			});
+		}
+
 		public static IHtmlString AmpHtml(this HtmlHelper htmlHelper, IDataItem dataItem, string fieldName, AmpComponentModel ampComponent)
 		{
 			object fieldValue = ((IDynamicFieldsContainer)dataItem).GetValue(fieldName);
@@ -21,9 +33,9 @@ namespace SitefinityWebApp.Mvc.HtmlHelpers
 			{
 				DynamicLinksParser dynamicLinksParser = new DynamicLinksParser(false);
 				fieldValue = dynamicLinksParser.Apply(fieldValue.ToString());
+				
+				fieldValue = ampConverter.Value.ConvertFromHtml(fieldValue.ToString());
 			}
-
-			// TODO: plug in html2amp converter here
 
 			return htmlHelper.Raw(fieldValue);
 		}
