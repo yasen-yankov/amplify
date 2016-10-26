@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Telerik.Sitefinity.AMP.Web.Services.Dto
 {
-    internal class WrapperTagDto
+    public class WrapperTagDto
     {
         public string TagName { get; set; }
 

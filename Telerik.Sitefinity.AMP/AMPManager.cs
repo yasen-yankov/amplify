@@ -139,6 +139,11 @@ namespace Telerik.Sitefinity.AMP
             return this.Provider.GetAmpPage(id);
         }
 
+		public AmpPage GetAmpPage(string pageUrl)
+		{
+			return this.Provider.GetAmpPage(pageUrl);
+		}
+
         /// <summary>
         /// Gets a query of all the AmpPages items.
         /// </summary>

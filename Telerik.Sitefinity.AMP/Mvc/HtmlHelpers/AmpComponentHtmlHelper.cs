@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Telerik.Sitefinity.AMP.Web.Services.Dto;
 using Telerik.Sitefinity.Model;
 using Telerik.Sitefinity.Modules.GenericContent;
 using Telerik.Sitefinity.Services;
@@ -25,7 +26,7 @@ namespace SitefinityWebApp.Mvc.HtmlHelpers
 			});
 		}
 
-		public static IHtmlString AmpHtml(this HtmlHelper htmlHelper, IDataItem dataItem, string fieldName, AmpComponentModel ampComponent)
+		public static IHtmlString AmpHtml(this HtmlHelper htmlHelper, IDataItem dataItem, string fieldName, AmpComponentDto ampComponent)
 		{
 			object fieldValue = ((IDynamicFieldsContainer)dataItem).GetValue(fieldName);
 
@@ -48,7 +49,7 @@ namespace SitefinityWebApp.Mvc.HtmlHelpers
 			return htmlHelper.Raw(ampHtml);
 		}
 
-		public static IHtmlString WrapperTag(this HtmlHelper htmlHelper, string html, WrapperTagModel wrapperTag)
+		public static IHtmlString WrapperTag(this HtmlHelper htmlHelper, string html, WrapperTagDto wrapperTag)
 		{
 			if (wrapperTag == null || string.IsNullOrEmpty(wrapperTag.TagName))
 			{
@@ -63,7 +64,7 @@ namespace SitefinityWebApp.Mvc.HtmlHelpers
 			return htmlHelper.Raw(string.Format("<{0} class=\"{1}\">{2}</{0}>", wrapperTag.TagName, wrapperTag.CssClass, html));
 		}
 
-		public static IHtmlString WrapperTag(this HtmlHelper htmlHelper, IHtmlString html, WrapperTagModel wrapperTag)
+		public static IHtmlString WrapperTag(this HtmlHelper htmlHelper, IHtmlString html, WrapperTagDto wrapperTag)
 		{
 			return htmlHelper.WrapperTag(html.ToString(), wrapperTag);
 		}

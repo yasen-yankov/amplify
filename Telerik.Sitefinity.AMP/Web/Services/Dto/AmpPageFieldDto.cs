@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Telerik.Sitefinity.AMP.Web.Services.Dto
 {
-    internal class AmpPageFieldDto
+    public class AmpPageFieldDto
     {
         public string FieldName { get; set; }
 

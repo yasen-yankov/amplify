@@ -1,4 +1,5 @@
 ﻿using ComboRox.Core.Utilities.SimpleGuard;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,6 +8,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Telerik.Sitefinity.AMP;
+using Telerik.Sitefinity.AMP.Web.Services.Dto;
 using Telerik.Sitefinity.Data;
 using Telerik.Sitefinity.Model;
 using Telerik.Sitefinity.Utilities.TypeConverters;
@@ -23,15 +26,24 @@ namespace SitefinityWebApp.Mvc.Controllers
 
 			itemUrl = "/" + itemUrl;
 
-			AmpPageDataModel ampPageData = this.GetAmpPageData();
-			IDataItem dataItem = this.GetDataItem(ampPageData.ItemType, itemUrl);
+			var ampPageData = AMPManager.GetManager().GetAmpPage(ampPageUrl);
+
+			if (ampPageData == null)
+			{
+				return this.HttpNotFound(string.Format("There is no AMP page with url: {0}", ampPageUrl));
+			}
+
+			var itemType = TypeResolutionService.ResolveType(ampPageData.ItemType);
+			IDataItem dataItem = this.GetDataItem(itemType, itemUrl);
 
 			this.ViewBag.Title = ampPageData.Title;
+
+			var fields = JsonConvert.DeserializeObject<List<AmpPageFieldDto>>(ampPageData.FieldsListJson);
 
 			return View(new AmpPageViewModel
 			{
 				DataItem = dataItem,
-				Fields = ampPageData.Fields.OrderBy(x => x.Ordinal)
+				Fields = fields.OrderBy(x => x.Ordinal)
 			});
 		}
 
@@ -43,21 +55,6 @@ namespace SitefinityWebApp.Mvc.Controllers
 			var dataItem = ((IUrlProvider)manager.Provider).GetItemFromUrl(itemType, itemUrl, out redirectUrl);
 
 			return dataItem;
-		}
-
-		private AmpPageDataModel GetAmpPageData()
-		{
-			return new AmpPageDataModel
-			{
-				Title = "My cool AMP page",
-				ItemType = TypeResolutionService.ResolveType("Telerik.Sitefinity.Blogs.Model.BlogPost"),
-				Fields = new List<AmpFieldModel>
-				{
-					new AmpFieldModel { FieldName = "Title", Ordinal = 0, WrapperTag = new WrapperTagModel { TagName = "h1" }},
-					new AmpFieldModel { FieldName = "Title", Ordinal = 1},
-					new AmpFieldModel { FieldName = "Content", Ordinal = 2, WrapperTag = new WrapperTagModel { TagName = "div", CssClass = "test" }},
-				}
-			};
 		}
 	}
 }
