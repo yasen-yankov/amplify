@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.UI;
 using Telerik.Sitefinity.AMP;
+using Telerik.Sitefinity.Frontend.Mvc.Infrastructure.Controllers.Attributes;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -18,6 +19,7 @@ using Telerik.Sitefinity.AMP;
 
 // Registers AMPInstaller.PreApplicationStart() to be executed prior to the application start
 [assembly: PreApplicationStartMethod(typeof(AMPInstaller), "PreApplicationStart")]
+[assembly: ControllerContainer]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
