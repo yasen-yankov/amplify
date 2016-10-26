@@ -16,22 +16,6 @@ namespace SitefinityWebApp
 
 		protected void Application_Start(object sender, EventArgs e)
 		{
-			Bootstrapper.Bootstrapped += Bootstrapper_Bootstrapped;
-		}
-
-		private void Bootstrapper_Bootstrapped(object sender, EventArgs e)
-		{
-			RouteCollectionExtensions.MapRoute(System.Web.Routing.RouteTable.Routes,
-				 "Classic",
-				 "amp/{ampPage}/{*itemUrl}",
-				 new
-				 {
-				 	controller = "AmpPage",
-					action = "Index",
-					ampPage = (string)null,
-					itemUrl = (string)null
-				 }
-			 );
 		}
 
 		protected void Session_Start(object sender, EventArgs e)

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -15,9 +16,9 @@ namespace SitefinityWebApp.Mvc.Controllers
 	public class AmpPageController : Controller
 	{
 		[HttpGet]
-		public ActionResult Index(string ampPage, string itemUrl)
+		public ActionResult Index(string ampPageUrl, string itemUrl)
 		{
-			Guard.Requires(ampPage, "ampPage").IsNotNullOrEmpty();
+			Guard.Requires(ampPageUrl, "ampPageUrl").IsNotNullOrEmpty();
 			Guard.Requires(itemUrl, "itemUrl").IsNotNullOrEmpty();
 
 			itemUrl = "/" + itemUrl;
