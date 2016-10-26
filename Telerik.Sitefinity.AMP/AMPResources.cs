@@ -94,7 +94,7 @@ namespace Telerik.Sitefinity.AMP
         /// </summary>
         /// <value>Title for the AmpPages's page.</value>
         [ResourceEntry("AmpPagesGroupPageTitle",
-            Value = "AmpPages",
+            Value = "Google AMP Pages",
             Description = "The title of AmpPages's page.",
             LastModified = "2016/10/26")]
         public string AmpPagesGroupPageTitle
@@ -125,7 +125,7 @@ namespace Telerik.Sitefinity.AMP
 		/// The URL name of AmpPages's page.
 		/// </summary>
 		[ResourceEntry("AmpPagesGroupPageUrlName",
-			Value = "AMP-AmpPages",
+			Value = "google-amp-pages",
 			Description = "The URL name of AmpPages's page.",
 			LastModified = "2016/10/26")]
 		public string AmpPagesGroupPageUrlName

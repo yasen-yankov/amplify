@@ -339,7 +339,7 @@ namespace Telerik.Sitefinity.AMP
 		{
 			initializer.Installer
 				.CreateModuleGroupPage(AMPModule.AmpPagesGroupPageId, "AmpPages")
-					.PlaceUnder(CommonNode.Administration)
+					.PlaceUnder(CommonNode.Design)
 					.LocalizeUsing<AMPResources>()
 					.SetTitleLocalized("AmpPagesGroupPageTitle")
 					.SetUrlNameLocalized("AmpPagesGroupPageUrlName")

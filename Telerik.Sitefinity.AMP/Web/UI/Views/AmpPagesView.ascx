@@ -8,7 +8,7 @@
 </sf:ResourceLinks>
 
 <h1 class="sfBreadCrumb">
-    <asp:Literal ID="Literal1" runat="server" Text="Amp Pages"></asp:Literal>
+    <asp:Literal ID="Literal1" runat="server" Text="AMP Pages"></asp:Literal>
 </h1>
 
 <div class="sfMain sfClearfix" ng-app="AmpModule" ng-cloak>
@@ -42,7 +42,7 @@
                                 <asp:Literal ID="Literal2" runat="server" Text='Title'></asp:Literal>
                             </th>
                             <th scope="col" class="k-header sfLarge">                        
-                                <asp:Literal ID="Literal3" runat="server" Text='Module'></asp:Literal>
+                                <asp:Literal ID="Literal3" runat="server" Text='Item Type'></asp:Literal>
                             </th>
                         </tr>
                     </thead>
@@ -50,7 +50,7 @@
                     <script type="text/ng-template" id="ampPagesTree">
                               
                         <td class="sfLarge"><a href="#">{{ampPage.Title}}</a></td>            
-                        <td class="sfShort">{{ampPage.Module}}</td>            
+                        <td class="sfShort">{{ampPage.ItemType}}</td>            
             
                                 
                     </script>
