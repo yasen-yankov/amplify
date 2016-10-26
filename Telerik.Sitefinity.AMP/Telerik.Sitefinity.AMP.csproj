@@ -33,6 +33,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AngleSharp">
+      <HintPath>..\ReferenceAssemblies\AngleSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetGuard">
+      <HintPath>..\ReferenceAssemblies\DotNetGuard.dll</HintPath>
+    </Reference>
+    <Reference Include="Html2Amp">
+      <HintPath>..\ReferenceAssemblies\Html2Amp.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack">
       <HintPath>..\packages\ServiceStack.Signed.4.0.52\lib\net40\ServiceStack.dll</HintPath>
     </Reference>
