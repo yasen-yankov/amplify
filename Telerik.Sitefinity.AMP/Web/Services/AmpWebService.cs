@@ -4,6 +4,9 @@ using ServiceStack;
 using System.Collections.Generic;
 using Telerik.Sitefinity.AMP.Web.Services.Dto;
 using Telerik.Sitefinity.AMP.Models;
+using Telerik.Sitefinity.Configuration;
+using Telerik.Sitefinity.AMP.Configuration;
+using Telerik.Sitefinity.Data.Metadata;
 
 namespace Telerik.Sitefinity.AMP.Web.Services
 {
@@ -59,5 +62,17 @@ namespace Telerik.Sitefinity.AMP.Web.Services
 
             ampManager.SaveChanges();
         }
+
+		public AmpConfigurationDto Get(AmpConfigurationRequest request)
+		{
+			var builtInModules = Config.Get<AMPConfig>().EnabledBuiltInModues.Elements.Select(x => x.Value);
+			var ampComponents = Config.Get<AMPConfig>().AmpComponents;
+
+			return new AmpConfigurationDto
+			{
+				AmpComponentTypes = ampComponents,
+				EnabledBuiltInModules = builtInModules,
+			};
+		}
     }
 }

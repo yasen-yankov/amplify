@@ -13,6 +13,10 @@ using Telerik.Sitefinity.Modules.Blogs;
 using Telerik.Sitefinity.Modules.News;
 using Telerik.Sitefinity.Modules.Events;
 using Telerik.Sitefinity.Modules.Lists;
+using Telerik.Sitefinity.Blogs.Model;
+using Telerik.Sitefinity.Events.Model;
+using Telerik.Sitefinity.Lists.Model;
+using Telerik.Sitefinity.News.Model;
 
 namespace Telerik.Sitefinity.AMP.Configuration
 {
@@ -39,10 +43,10 @@ namespace Telerik.Sitefinity.AMP.Configuration
 		{
 			base.OnPropertiesInitialized();
 
-			this.EnabledBuiltInModues.Add(new ConfigValue<string>(typeof(BlogsModule).AssemblyQualifiedName, this.EnabledBuiltInModues));
-			this.EnabledBuiltInModues.Add(new ConfigValue<string>(typeof(NewsModule).AssemblyQualifiedName, this.EnabledBuiltInModues));
-			this.EnabledBuiltInModues.Add(new ConfigValue<string>(typeof(EventsModule).AssemblyQualifiedName, this.EnabledBuiltInModues));
-			this.EnabledBuiltInModues.Add(new ConfigValue<string>(typeof(ListsModule).AssemblyQualifiedName, this.EnabledBuiltInModues));
+			this.EnabledBuiltInModues.Add(new ConfigValue<string>(typeof(BlogPost).FullName, this.EnabledBuiltInModues));
+			this.EnabledBuiltInModues.Add(new ConfigValue<string>(typeof(NewsItem).FullName, this.EnabledBuiltInModues));
+			this.EnabledBuiltInModues.Add(new ConfigValue<string>(typeof(Event).FullName, this.EnabledBuiltInModues));
+			this.EnabledBuiltInModues.Add(new ConfigValue<string>(typeof(List).FullName, this.EnabledBuiltInModues));
 
 			this.AmpComponents.Add("Image", typeof(ImageAmpComponent).AssemblyQualifiedName);
 		}
