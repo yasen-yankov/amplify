@@ -49,24 +49,25 @@ namespace Telerik.Sitefinity.AMP.Configuration
 			this.EnabledBuiltInModues.Add(new ConfigValue<string>(typeof(List).FullName, this.EnabledBuiltInModues));
 
 			this.AmpComponents.Add("Image", typeof(ImageAmpComponent).AssemblyQualifiedName);
+			this.AmpComponents.Add("Gallery", typeof(GalleryAmpComponent).AssemblyQualifiedName);
 		}
 
-        /// <summary>
-        /// Gets or sets the name of the default data provider. 
-        /// </summary>
-        [DescriptionResource(typeof(ConfigDescriptions), "DefaultProvider")]
-        [ConfigurationProperty("defaultProvider", DefaultValue = "AMPOpenAccessDataProvider")]
-        public override string DefaultProvider
-        {
-            get
-            {
-                return (string)this["defaultProvider"];
-            }
-            set
-            {
-                this["defaultProvider"] = value;
-            }
-        }
+		/// <summary>
+		/// Gets or sets the name of the default data provider. 
+		/// </summary>
+		[DescriptionResource(typeof(ConfigDescriptions), "DefaultProvider")]
+		[ConfigurationProperty("defaultProvider", DefaultValue = "AMPOpenAccessDataProvider")]
+		public override string DefaultProvider
+		{
+			get
+			{
+				return (string)this["defaultProvider"];
+			}
+			set
+			{
+				this["defaultProvider"] = value;
+			}
+		}
 	    #endregion
 
 		[ConfigurationProperty("enabledBuiltInModues")]
