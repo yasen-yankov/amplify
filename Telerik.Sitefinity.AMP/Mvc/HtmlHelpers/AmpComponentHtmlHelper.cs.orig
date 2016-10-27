@@ -14,7 +14,6 @@ using Telerik.Sitefinity.Services;
 using Telerik.Sitefinity.Web;
 using Telerik.Sitefinity.Web.Utilities;
 using Telerik.Sitefinity.RelatedData;
-using System.Web.UI;
 
 namespace SitefinityWebApp.Mvc.HtmlHelpers
 {
@@ -26,25 +25,27 @@ namespace SitefinityWebApp.Mvc.HtmlHelpers
 		{
 			return new HtmlToAmpConverter().WithConfiguration(new RunConfiguration
 			{
+<<<<<<< HEAD
+				RelativeUrlsHost = SystemManager.CurrentContext.CurrentSite.GetUri().AbsoluteUri
+=======
 				RelativeUrlsHost = "http://localhost:8033"
+>>>>>>> Added fixes for AmpImageComponent
 			});
 		}
 
 		public static IHtmlString AmpHtml(this HtmlHelper htmlHelper, IDataItem dataItem, string fieldName, AmpComponentDto ampComponent)
 		{
-			//object fieldValue = ((IDynamicFieldsContainer)dataItem).GetValue(fieldName);
+			object fieldValue = ((IDynamicFieldsContainer)dataItem).GetValue(fieldName);
 
-			object fieldValue = DataBinder.Eval(dataItem, fieldName);
+			if (fieldValue == null)
+			{
+				fieldValue = dataItem.GetRelatedItems(fieldName);
+			}
 
 			if (fieldValue is string || fieldValue is Lstring)
 			{
 				DynamicLinksParser dynamicLinksParser = new DynamicLinksParser(false);
 				fieldValue = dynamicLinksParser.Apply(fieldValue.ToString());
-			}
-
-			if (fieldValue == null || (fieldValue is IEnumerable<object>  && !((IEnumerable<object>)fieldValue).Any()))
-			{
-				fieldValue = dataItem.GetRelatedItems(fieldName);
 			}
 
 			string ampHtml = string.Empty;

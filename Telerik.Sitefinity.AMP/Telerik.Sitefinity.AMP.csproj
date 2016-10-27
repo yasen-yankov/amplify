@@ -193,6 +193,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AmpComponents\GalleryAmpComponent.cs" />
     <Compile Include="AmpComponents\IAmpComponent.cs" />
     <Compile Include="AmpComponents\ImageAmpComponent.cs" />
     <Compile Include="AMPDataProvider.cs" />
