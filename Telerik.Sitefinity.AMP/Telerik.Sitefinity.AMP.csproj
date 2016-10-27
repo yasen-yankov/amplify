@@ -234,14 +234,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BasicSettings\readme.txt" />
-    <Content Include="Configuration\readme.txt" />
-    <Content Include="FieldControls\readme.txt" />
-    <Content Include="Mvc\Controllers\readme.txt" />
-    <Content Include="Mvc\Models\readme.txt" />
-    <Content Include="Mvc\Views\readme.txt" />
-    <Content Include="Web\Scripts\readme.txt" />
-    <Content Include="Web\UI\readme.txt" />
     <EmbeddedResource Include="Web\UI\Scripts\AmpPagesView.js" />
     <EmbeddedResource Include="Web\UI\Views\AmpPagesView.ascx">
       <SubType>ASPXCodeBehind</SubType>
@@ -250,9 +242,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Web\UI\Scripts\AmpPageView.js" />
-    <Content Include="Widgets\Form\readme.txt" />
-    <Content Include="Widgets\Layout\readme.txt" />
-    <Content Include="Widgets\Page\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
