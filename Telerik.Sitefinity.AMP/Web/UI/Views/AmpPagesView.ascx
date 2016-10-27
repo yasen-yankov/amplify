@@ -21,7 +21,7 @@
 
             <div ng-show="!loading && ampPages.length == 0" class="sfEmptyList">
                 <div class="sfMessage sfMsgNeutral sfMsgVisible">
-                    <asp:Literal ID="Literal8" runat="server" Text="You have no amp pages yet."></asp:Literal>
+                    <asp:Literal ID="Literal8" runat="server" Text="You have no AMP pages yet."></asp:Literal>
                 </div>                
 
                 <ol class="sfWhatsNext">
@@ -29,9 +29,18 @@
 		                <span class="sfDecisionIcon"></span>
 	                </li>
                     <li class="sfCreateSubsequentItem">
-                        <asp:HyperLink ID="HyperLink1" runat="server" Target="_blank" Text="Create an amp page" NavigateUrl="/Sitefinity/Administration/AMP-AmpPages/Details"></asp:HyperLink>
+						<a href="{{ampDetailsPageUrl}}/Create">Create an AMP page</a>
                     </li>
                 </ol>
+            </div>
+
+			<div class="sfButtonArea">
+                <a class="sfLinkBtn sfSave" href="{{ampDetailsPageUrl}}/Create">
+					<span class="sfLinkBtnIn">
+						<asp:Literal ID="LiteralSave" runat="server" Text='<%$Resources:Labels, Create%>'>
+						</asp:Literal>
+					</span>
+                </a>
             </div>
 
             <div class="k-grid k-widget rgTopOffset" ng-if="ampPages && ampPages.length">
@@ -48,11 +57,8 @@
                     </thead>
 
                     <script type="text/ng-template" id="ampPagesTree">
-                              
-                        <td class="sfLarge"><a href="#">{{ampPage.Title}}</a></td>            
-                        <td class="sfShort">{{ampPage.ItemType}}</td>            
-            
-                                
+                        <td class="sfLarge"><a href="{{ampDetailsPageUrl}}/{{ampPage.Id}}">{{ampPage.Title}}</a></td>            
+                        <td class="sfShort">{{ampPage.ItemType}}</td>
                     </script>
                     <tbody>
                         <tr ng-repeat="ampPage in ampPages" ng-include="'ampPagesTree'"></tr>
@@ -64,13 +70,15 @@
 </div>
 
 <script>
-		angular.module("AmpModule").value("ampServiceUrl", "<%= hdfAmpServiceUrl.Value%>");
+	angular.module("AmpModule").value("ampServiceUrl", "<%= hdfAmpServiceUrl.Value%>");
+	angular.module("AmpModule").value("ampDetailsPageUrl", "<%= hdfAmpDetailsPageHyperLink.Value%>");
 </script>
 
 <asp:HiddenField runat="server" ID="hdfAmpServiceUrl" />
+<asp:HiddenField runat="server" ID="hdfAmpDetailsPageHyperLink" />
 
 <script>
-		$(document).ready(function () {
-				$('body').addClass("sfNoSidebar");
-		});
+	$(document).ready(function () {
+		$('body').addClass("sfNoSidebar");
+	});
 </script>
