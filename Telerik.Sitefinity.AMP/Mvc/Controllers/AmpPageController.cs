@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using Telerik.Sitefinity.AMP;
 using Telerik.Sitefinity.AMP.Configuration;
+using Telerik.Sitefinity.AMP.Models;
 using Telerik.Sitefinity.AMP.Web.Services.Dto;
 using Telerik.Sitefinity.Configuration;
 using Telerik.Sitefinity.Data;
@@ -33,20 +34,25 @@ namespace Telerik.Sitefinity.AMP.Mvc.Models
 				return this.HttpNotFound(string.Format("There is no AMP page with url: {0}", ampPageUrl));
 			}
 
-			IDataItem dataItem = this.GetDataItem(ampPageData.ItemType, itemUrl);
-
-			this.ViewBag.Title = ampPageData.Title;
-
-			var fields = JsonConvert.DeserializeObject<List<AmpPageFieldDto>>(ampPageData.FieldsListJson);
+			this.SetPageData(ampPageData);
 
 			string layoutTemplatePath = GetLayoutTemplate(ampPageData.LayoutTemplatePath);
 			string templatePath = GetTemplate(ampPageData.TempltePath);
 
+			var fields = JsonConvert.DeserializeObject<List<AmpPageFieldDto>>(ampPageData.FieldsListJson).OrderBy(x => x.Ordinal);
+			IDataItem dataItem = this.GetDataItem(ampPageData.ItemType, itemUrl);
+
 			return View(templatePath, masterName: layoutTemplatePath, model: new AmpPageViewModel
 			{
 				DataItem = dataItem,
-				Fields = fields.OrderBy(x => x.Ordinal)
+				Fields = fields
 			});
+		}
+ 
+		private void SetPageData(AmpPage ampPageData)
+		{
+			this.ViewBag.Title = ampPageData.Title;
+			this.ViewBag.OriginalPageUrl = ampPageData.PageUrl;
 		}
 
 		private static string GetTemplate(string template)
