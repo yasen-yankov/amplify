@@ -6,10 +6,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Telerik.Sitefinity.AMP.Web.Services.Dto;
+using Telerik.Sitefinity.AMP.AmpComponents;
 using Telerik.Sitefinity.Model;
 using Telerik.Sitefinity.Modules.GenericContent;
 using Telerik.Sitefinity.Services;
+using Telerik.Sitefinity.Web;
 using Telerik.Sitefinity.Web.Utilities;
+using Telerik.Sitefinity.RelatedData;
 
 namespace SitefinityWebApp.Mvc.HtmlHelpers
 {
@@ -21,26 +25,41 @@ namespace SitefinityWebApp.Mvc.HtmlHelpers
 		{
 			return new HtmlToAmpConverter().WithConfiguration(new RunConfiguration
 			{
-				RelativeUrlsHost = "http://localhost"
+				RelativeUrlsHost = SystemManager.CurrentContext.CurrentSite.GetUri().AbsoluteUri
 			});
 		}
 
-		public static IHtmlString AmpHtml(this HtmlHelper htmlHelper, IDataItem dataItem, string fieldName, AmpComponentModel ampComponent)
+		public static IHtmlString AmpHtml(this HtmlHelper htmlHelper, IDataItem dataItem, string fieldName, AmpComponentDto ampComponent)
 		{
 			object fieldValue = ((IDynamicFieldsContainer)dataItem).GetValue(fieldName);
+
+			if (fieldValue == null)
+			{
+				fieldValue = dataItem.GetRelatedItems(fieldName);
+			}
 
 			if (fieldValue is string || fieldValue is Lstring)
 			{
 				DynamicLinksParser dynamicLinksParser = new DynamicLinksParser(false);
 				fieldValue = dynamicLinksParser.Apply(fieldValue.ToString());
-				
-				fieldValue = ampConverter.Value.ConvertFromHtml(fieldValue.ToString());
 			}
 
-			return htmlHelper.Raw(fieldValue);
+			string ampHtml = string.Empty;
+			if (ampComponent == null)
+			{
+				ampHtml = ampConverter.Value.ConvertFromHtml(fieldValue.ToString());
+			}
+			else
+			{
+				var componentType = Type.GetType(ampComponent.ComponentType);
+				var ampComponentGenerator = (IAmpComponent)Activator.CreateInstance(componentType);
+				ampHtml = ampComponentGenerator.Generate(fieldValue);
+			}
+
+			return htmlHelper.Raw(ampHtml);
 		}
 
-		public static IHtmlString WrapperTag(this HtmlHelper htmlHelper, string html, WrapperTagModel wrapperTag)
+		public static IHtmlString WrapperTag(this HtmlHelper htmlHelper, string html, WrapperTagDto wrapperTag)
 		{
 			if (wrapperTag == null || string.IsNullOrEmpty(wrapperTag.TagName))
 			{
@@ -55,7 +74,7 @@ namespace SitefinityWebApp.Mvc.HtmlHelpers
 			return htmlHelper.Raw(string.Format("<{0} class=\"{1}\">{2}</{0}>", wrapperTag.TagName, wrapperTag.CssClass, html));
 		}
 
-		public static IHtmlString WrapperTag(this HtmlHelper htmlHelper, IHtmlString html, WrapperTagModel wrapperTag)
+		public static IHtmlString WrapperTag(this HtmlHelper htmlHelper, IHtmlString html, WrapperTagDto wrapperTag)
 		{
 			return htmlHelper.WrapperTag(html.ToString(), wrapperTag);
 		}

@@ -26,7 +26,7 @@
 
 			<h1 class="sfBreadCrumb sfBreadCrumbWithBack">{{ampPage.Title}}
 				<span class="sfBreadCrumbBack">
-					<a href="{{ampPage.ampGroupPageUrl}}">Back to all AMP pages</a>
+					<a href="{{ampGroupPageUrl}}">Back to all AMP pages</a>
 				</span>
 			</h1>
 
@@ -44,7 +44,8 @@
                 </li>
 				<li>
                     <label for="ampPageItemType" class="sfTxtLbl">Item Type</label>
-					<input id="ampPageItemType" type="text" ng-model="ampPage.ItemType" class="sfTxt" />
+					<select ng-model="ampPage.ItemType" ng-options="module for module in ampConfig.EnabledBuiltInModules">
+					</select>
                 </li>
 				<li>
 					<div style="float: left;">
@@ -79,7 +80,7 @@
 						<ul style="padding-left: 30px; border-left: 1px solid #eee;">
 							<li>
 								<div style="float: left;">
-									<label for="selectedFieldTagName" class="sfTxtLbl">Tag Name</label>
+									<label for="selectedFieldTagName" class="sfTxtLbl">Wrapper Tag</label>
 									<input style="width: 200px;" id="selectedFieldTagName" type="text" ng-model="selectedField.WrapperTag.TagName" class="sfTxt" />
 								</div>
 								<div style="float: left; padding-left: 30px;">
@@ -90,8 +91,9 @@
 							</li>
 							<li>
 								<div style="float: left;">
-									<label for="selectedFieldComponentType" class="sfTxtLbl">Component Type</label>
-									<input style="width: 200px;" id="selectedFieldComponentType" type="text" ng-model="selectedField.AmpComponent.ComponentType" class="sfTxt" />
+									<label for="selectedFieldComponentType" class="sfTxtLbl">AMP Component Type</label>
+									<select ng-model="selectedField.AmpComponent.ComponentType" ng-options="obj.value as obj.key for obj in componentTypes">
+									</select>
 								</div>
 								<div style="float: left; padding-left: 30px;">
 									<label for="selectedFieldTagName" class="sfTxtLbl">Component CssClass</label>
@@ -114,12 +116,14 @@
 
 <script>
 	angular.module("AmpPageModule").value("ampServiceUrl", "<%= hdfAmpServiceUrl.Value%>");
+	angular.module("AmpPageModule").value("ampConfigServiceUrl", "<%= hdfAmpConfigServiceUrl.Value%>");
 	angular.module("AmpPageModule").value("ampPageId", "<%= hdfAmpPageId.Value%>");
 	angular.module("AmpPageModule").value("isCreateMode", "<%= hdfIsCreateMode.Value%>");
 	angular.module("AmpPageModule").value("ampGroupPageUrl", "<%= hdfAmpGroupPageUrl.Value%>");
 </script>
 
 <asp:HiddenField runat="server" ID="hdfAmpServiceUrl" />
+<asp:HiddenField runat="server" ID="hdfAmpConfigServiceUrl" />
 <asp:HiddenField runat="server" ID="hdfAmpPageId" />
 <asp:HiddenField runat="server" ID="hdfIsCreateMode" />
 <asp:HiddenField runat="server" ID="hdfAmpGroupPageUrl" />

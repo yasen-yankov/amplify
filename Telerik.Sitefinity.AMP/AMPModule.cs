@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Web.Mvc;
+using System.Web.Routing;
 using Telerik.Sitefinity.Abstractions;
 using Telerik.Sitefinity.Abstractions.VirtualPath.Configuration;
 using Telerik.Sitefinity.AMP.Configuration;
@@ -89,6 +91,23 @@ namespace Telerik.Sitefinity.AMP
 
             this.InstallBackendPages(initializer);
         }
+
+		public override void Load()
+		{
+			base.Load();
+
+			RouteCollectionExtensions.MapRoute(RouteTable.Routes,
+				 "GoogleAMPPagesRoute",
+				 "amp/{ampPageUrl}/{*itemUrl}",
+				 new
+				 {
+					 controller = "AmpPage",
+					 action = "Index",
+					 ampPageUrl = (string)null,
+					 itemUrl = (string)null
+				 }
+			 );
+		}
 
         /// <summary>
         /// Upgrades this module from the specified version.

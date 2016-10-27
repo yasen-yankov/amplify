@@ -25,11 +25,13 @@ namespace Telerik.Sitefinity.AMP.Web.Services
                 .Add<AmpPagesGetRequest>(AmpServiceStackPlugin.AmpPagesRoute, "GET")
                 .Add<AmpPageInsertRequest>(AmpServiceStackPlugin.AmpPageInsertRoute, "PUT")
                 .Add<AmpPageUpdateRequest>(AmpServiceStackPlugin.AmpPageUpdateRoute, "POST")
-                .Add<AmpPageDeleteRequest>(AmpServiceStackPlugin.AmpPageDeleteRoute, "DELETE");
+                .Add<AmpPageDeleteRequest>(AmpServiceStackPlugin.AmpPageDeleteRoute, "DELETE")
+				.Add<AmpConfigurationRequest>(AmpServiceStackPlugin.AmpConfigurationRoute, ApplyTo.Get);
         }
 
         internal const string AmpWebServiceRoute = "/Sitefinity/amp";
-        internal const string AmpPagesRoute = AmpServiceStackPlugin.AmpWebServiceRoute + "/pages";
+		internal const string AmpPagesRoute = AmpServiceStackPlugin.AmpWebServiceRoute + "/pages";
+		internal const string AmpConfigurationRoute = AmpServiceStackPlugin.AmpWebServiceRoute + "/configuration";
         internal const string AmpPageInsertRoute = AmpServiceStackPlugin.AmpWebServiceRoute + "/pages";
         internal const string AmpPageUpdateRoute = AmpServiceStackPlugin.AmpWebServiceRoute + "/pages/{id}";
         internal const string AmpPageDeleteRoute = AmpServiceStackPlugin.AmpWebServiceRoute + "/pages/{id}";

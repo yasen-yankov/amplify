@@ -34,6 +34,11 @@ namespace Telerik.Sitefinity.AMP
                 return "AMPDataProvider";
             }
         }
+
+		public AmpPage GetAmpPage(string pageUrl)
+		{
+			return this.GetAmpPages().FirstOrDefault(x => x.UrlName == pageUrl);
+		}
         #endregion
         
         #region Abstract methods
@@ -72,5 +77,5 @@ namespace Telerik.Sitefinity.AMP
         #region Private fields and constants
         private static Type[] knownTypes;
         #endregion
-    }
+	}
 }

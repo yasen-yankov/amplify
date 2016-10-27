@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Telerik.Sitefinity.AMP.Web.Services.Dto;
 using Telerik.Sitefinity.Model;
 
 namespace SitefinityWebApp.Mvc.Controllers
@@ -44,6 +45,6 @@ namespace SitefinityWebApp.Mvc.Controllers
 	{
 		public IDataItem DataItem { get; set; }
 
-		public IEnumerable<AmpFieldModel> Fields { get; set; }
+		public IEnumerable<AmpPageFieldDto> Fields { get; set; }
 	}
 }
