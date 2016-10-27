@@ -36,7 +36,7 @@
 						<label for="ampPageTitle" class="sfTxtLbl">Title</label>
 						<input id="ampPageTitle" type="text" ng-model="ampPage.Title" class="sfTxt" ng-change="updateUrlName(ampPage.Title)" />
 					</div>
-					<div style="float: left; padding-left: 50px;">
+					<div ng-show="ampPage.Title" style="float: left; padding-left: 50px;">
 						<label class="sfTxtLbl">AMP Page URL</label>
 						<label>/amp/{{ampPage.UrlName}}/[item URL]</label>
 					</div>
@@ -44,7 +44,7 @@
                 </li>
 				<li>
                     <label for="ampPageItemType" class="sfTxtLbl">Item Type</label>
-					<select ng-model="ampPage.ItemType" ng-options="module for module in ampConfig.EnabledBuiltInModules">
+					<select style="width: 412px;" ng-model="ampPage.ItemType" ng-options="module for module in ampConfig.EnabledBuiltInModules">
 					</select>
                 </li>
 				<li>
@@ -60,7 +60,7 @@
                 </li>
             </ul>
 
-			<ul class="sfForm">
+			<ul class="sfForm" ng-show="ampPage.ItemType">
 				<li>
 					<h3>Fields</h3>
 					<div class="sfButtonArea">
@@ -69,15 +69,22 @@
 				</li>
                 <li>
 					<div class="sf-backend-wrp" style="float: left; width: 50%;">
-						<div class="list-group list-group-endless" kendo-sortable k-options="sortableOptions" k-on-change="sortFieldListItems(kendoEvent)" style="padding-right: 30px; margin-top: 20px;">
+						<div class="list-group list-group-endless" kendo-sortable k-options="sortableOptions" k-on-change="sortFieldListItems(kendoEvent)" style="padding-right: 30px; margin-top: 20px; border-right: 1px solid #eee;">
 							<div class="list-group-item list-group-item-multiselect" ng-class="{active: selectedField==field}" ng-click="fieldItemClicked(field)" ng-repeat="field in ampPage.Fields">
 								<span class="handler list-group-item-drag"></span>
 								<div><span sf-max-length="60">{{field.FieldName}}</span></div>
 							</div>
 						</div>
 					</div>
+					<div style="float: right; width: 50%;" ng-show="!selectedField">
+						<ul style="padding-left: 30px; margin-top: 20px;">
+							<li>
+								<label class="sfTxtLbl">Click an a field to edit its properties</label>
+							</li>
+						</ul>
+					</div>
 					<div style="float: right; width: 50%;" ng-show="selectedField">
-						<ul style="padding-left: 30px; border-left: 1px solid #eee;">
+						<ul style="padding-left: 30px;">
 							<li>
 								<div style="float: left;">
 									<label for="selectedFieldTagName" class="sfTxtLbl">Wrapper Tag</label>
@@ -92,7 +99,7 @@
 							<li>
 								<div style="float: left;">
 									<label for="selectedFieldComponentType" class="sfTxtLbl">AMP Component Type</label>
-									<select style="width: 200px;" ng-model="selectedField.AmpComponent.ComponentType" ng-options="obj.value as obj.key for obj in componentTypes">
+									<select style="width: 212px;" ng-model="selectedField.AmpComponent.ComponentType" ng-options="obj.value as obj.key for obj in componentTypes">
 									</select>
 								</div>
 								<div style="float: left; padding-left: 30px;">
@@ -111,6 +118,35 @@
                 <input ng-hide="isCreateMode" type="button" value="Save" class="sfLinkBtn sfSave" ng-click="save()" />
 				<input ng-show="isCreateMode" type="button" value="Create" class="sfLinkBtn sfSave" ng-click="create()" />
             </div>
+		</div>
+
+		<div kendo-window="selectFieldsDialog" k-modal="true" k-title="'Select fields'" k-width="425" k-animation="false"
+			k-resizable="false" k-actions="[]" k-visible="false" k-on-open="includeContent = false">
+			<div class="sfSelectorDialog">
+				<h1>Select fields</h1>
+				<div class="sfBasicDim">
+					<div class="sfContentViews">
+						<p>
+							Select fields to be included in the AMP page builder.
+						</p>
+						<div class="sf-backend-wrp">
+							<div class="list-group list-group-endless" kendo-sortable k-options="sortableOptions" k-on-change="sortFieldListItems(kendoEvent)" style="padding-right: 30px; margin-top: 20px; border-right: 1px solid #eee;">
+								<div class="list-group-item list-group-item-multiselect" ng-class="{active: selectedField==field}" ng-click="fieldItemClicked(field)" ng-repeat="field in ampPage.Fields">
+									<span class="handler list-group-item-drag"></span>
+									<div><span sf-max-length="60">{{field.FieldName}}</span></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="sfButtonArea">
+					<a class="sfLinkBtn sfSave" ng-click="confirmFieldSelection()"><span class="sfLinkBtnIn">
+						<asp:Literal ID="Literal4" runat="server" Text='<%$Resources:Labels, Save%>'></asp:Literal></span></a>
+					<a class="sfCancel activate-cancel" ng-click="cancelFieldSelection()">
+						<asp:Literal ID="Literal5" runat="server" Text="<%$Resources:Labels, Cancel %>"></asp:Literal>
+					</a>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

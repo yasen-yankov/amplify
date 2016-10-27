@@ -112,6 +112,17 @@
 			handler: ".handler",
 			axis: "y"
 		};
+
+		$scope.selectFields = function () {
+			$scope.selectFieldsDialog.center();
+			$scope.selectFieldsDialog.wrapper[0].style.top = "50px";
+			$scope.selectFieldsDialog.open();
+		};
+
+		$scope.cancelFieldSelection = function () {
+			$scope.includeContent = false;
+			$scope.selectFieldsDialog.close();
+		};
 	}]);
 
 	ampPageModule.factory('AmpService', ['$http', 'ampServiceUrl', 'ampPageId', function ($http, ampServiceUrl, ampPageId) {
