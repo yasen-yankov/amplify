@@ -26,7 +26,7 @@ namespace Telerik.Sitefinity.AMP.Mvc.HtmlHelpers
 		{
 			return new HtmlToAmpConverter().WithConfiguration(new RunConfiguration
 			{
-				RelativeUrlsHost = "http://localhost:8033"
+				RelativeUrlsHost = SystemManager.CurrentContext.CurrentSite.GetUri().AbsoluteUri
 			});
 		}
 
