@@ -22,7 +22,7 @@ namespace Telerik.Sitefinity.AMP.Web.Services
 
             appHost.RegisterService(typeof(AmpWebService), AmpServiceStackPlugin.AmpWebServiceRoute);
             appHost.Routes
-                .Add<AmpPagesRequest>(AmpServiceStackPlugin.AmpPagesRoute, "GET")
+                .Add<AmpPagesGetRequest>(AmpServiceStackPlugin.AmpPagesRoute, "GET")
                 .Add<AmpPageInsertRequest>(AmpServiceStackPlugin.AmpPageInsertRoute, "PUT")
                 .Add<AmpPageUpdateRequest>(AmpServiceStackPlugin.AmpPageUpdateRoute, "POST")
                 .Add<AmpPageDeleteRequest>(AmpServiceStackPlugin.AmpPageDeleteRoute, "DELETE")

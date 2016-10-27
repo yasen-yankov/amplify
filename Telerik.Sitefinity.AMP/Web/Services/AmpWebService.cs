@@ -16,10 +16,18 @@ namespace Telerik.Sitefinity.AMP.Web.Services
         {
         }
 
-        public IEnumerable<AmpPageDto> Get(AmpPagesRequest request)
+        public IEnumerable<AmpPageDto> Get(AmpPagesGetRequest request)
         {
             var ampManager = AMPManager.GetManager();
-            var ampPageDtos = ampManager.GetAmpPages().Select(a => new AmpPageDto(a));
+
+            IQueryable<AmpPage> ampPagesQuery = ampManager.GetAmpPages();
+
+            if (request.Id.HasValue)
+            {
+                ampPagesQuery = ampPagesQuery.Where(p => p.Id == request.Id);
+            }
+
+            var ampPageDtos = ampPagesQuery.Select(a => new AmpPageDto(a));
 
             return ampPageDtos;
         }

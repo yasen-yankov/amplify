@@ -1,13 +1,6 @@
-﻿@{
-	Layout = "~/Mvc/Views/Shared/_AMPLayout.cshtml";
-}
-@using SitefinityWebApp.Mvc.HtmlHelpers;
+﻿@using Telerik.Sitefinity.AMP.Mvc.HtmlHelpers;
 
-@model SitefinityWebApp.Mvc.Controllers.AmpPageViewModel
-
-@{
-    ViewBag.Title2 = "Index";
-}
+@model Telerik.Sitefinity.AMP.Mvc.Models.AmpPageViewModel
 
 @foreach (var field in Model.Fields)
 {

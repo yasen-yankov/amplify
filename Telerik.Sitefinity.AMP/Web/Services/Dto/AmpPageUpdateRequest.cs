@@ -40,5 +40,17 @@ namespace Telerik.Sitefinity.AMP.Web.Services.Dto
         /// Gets or sets the Fields list.
         /// </summary>
         public IList<AmpPageFieldDto> Fields { get; set; }
+
+		/// <summary>
+		/// Gets or sets the layout template path.
+		/// </summary>
+		/// <value>The layout template path.</value>
+		public string LayoutTemplatePath { get; set; }
+
+		/// <summary>
+		/// Gets or sets the templte path.
+		/// </summary>
+		/// <value>The templte path.</value>
+		public string TempltePath { get; set; }
     }
 }

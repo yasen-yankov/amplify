@@ -3,6 +3,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Telerik.Sitefinity.AMP.Web.Services;
+using Telerik.Sitefinity.Web;
 using Telerik.Sitefinity.Web.UI;
 
 namespace Telerik.Sitefinity.AMP.Web.UI
@@ -50,6 +51,17 @@ namespace Telerik.Sitefinity.AMP.Web.UI
 
 		#region Control references
 
+        /// <summary>
+        /// Gets a reference to the html element that serves URL for single amp page hidden field
+        /// </summary>
+        protected HiddenField AmpDetailsPageUrlHiddenField
+        {
+            get
+            {
+                return this.Container.GetControl<HiddenField>("hdfAmpDetailsPageHyperLink", true);
+            }
+        }
+
 		/// <summary>
 		/// Gets the reference to the export types service URL hidden field
 		/// </summary>
@@ -83,12 +95,15 @@ namespace Telerik.Sitefinity.AMP.Web.UI
 		{
 			var scripts = new List<ScriptReference>();
 			scripts.Add(new ScriptReference(AmpPagesView.ScriptReference, typeof(AmpPagesView).Assembly.FullName));
-			return scripts;
+			
+            return scripts;
 		}
 
 		/// <inheritdoc />
 		protected override void InitializeControls(GenericContainer container)
 		{
+            var currentNode = BackendSiteMap.FindSiteMapNode(AMPModule.AmpPageDetailPageId, false);
+            this.AmpDetailsPageUrlHiddenField.Value = RouteHelper.ResolveUrl(currentNode != null ? currentNode.Url : "~/Sitefinity", UrlResolveOptions.Rooted | UrlResolveOptions.RemoveTrailingSlash);
 			this.AmpServiceUrlHiddenField.Value = VirtualPathUtility.ToAbsolute("~/RestApi/" + AmpServiceStackPlugin.AmpPagesRoute);
 		}
 		

@@ -118,6 +118,18 @@ namespace Telerik.Sitefinity.AMP.Models
         /// </summary>
         public string FieldsListJson { get; set; }
 
+		/// <summary>
+		/// Gets or sets the layout template path.
+		/// </summary>
+		/// <value>The layout template path.</value>
+		public string LayoutTemplatePath { get; set; }
+
+		/// <summary>
+		/// Gets or sets the templte path.
+		/// </summary>
+		/// <value>The templte path.</value>
+		public string TempltePath { get; set; }
+
         #endregion
         
         #region Private fields and constants
