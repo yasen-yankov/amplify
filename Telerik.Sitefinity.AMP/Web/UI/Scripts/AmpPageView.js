@@ -3,10 +3,11 @@
 
 	var ampPageModule = angular.module('AmpPageModule', ["kendo.directives"]);
 
-	ampPageModule.controller("AmpPageController", ['$scope', '$window', 'AmpService', 'AmpConfigService', 'ampPageId', 'ampGroupPageUrl', 'isCreateMode', function ($scope, $window, AmpService, AmpConfigService, ampPageId, ampGroupPageUrl, isCreateMode) {
+	ampPageModule.controller("AmpPageController", ['$scope', '$window', 'AmpService', 'AmpConfigService', 'StaticModuleMetaDataService', 'ampPageId', 'ampGroupPageUrl', 'isCreateMode', function ($scope, $window, AmpService, AmpConfigService, StaticModuleMetaDataService, ampPageId, ampGroupPageUrl, isCreateMode) {
 		$scope.ampPageId = ampPageId;
 		$scope.ampGroupPageUrl = ampGroupPageUrl;
 		$scope.isCreateMode = (isCreateMode.toLowerCase() === "true");
+		$scope.itemTypeFields = [];
 
 		var loadAmpConfig = function () {
 			AmpConfigService.get().success(function (data) {
@@ -112,6 +113,93 @@
 			handler: ".handler",
 			axis: "y"
 		};
+
+		$scope.selectFields = function () {
+			loadItemTypeFields($scope.ampPage.ItemType);
+
+			$scope.selectFieldsDialog.center();
+			$scope.selectFieldsDialog.wrapper[0].style.top = "50px";
+			$scope.selectFieldsDialog.open();
+		};
+
+		$scope.confirmFieldSelection = function () {
+			$scope.includeContent = false;
+			$scope.selectFieldsDialog.close();
+		};
+
+		$scope.cancelFieldSelection = function () {
+			$scope.includeContent = false;
+			$scope.selectFieldsDialog.close();
+		};
+
+		$scope.isFieldItemSelected = function (fieldName) {
+			if ($scope.ampPage.Fields) {
+				for (var i = 0; i < $scope.ampPage.Fields.length; i++) {
+					if ($scope.ampPage.Fields[i].FieldName === fieldName) {
+						return true;
+					}
+				}
+			}
+
+			return false;
+		};
+
+		$scope.fieldItemSelectionClicked = function (fieldName) {
+			if (!$scope.ampPage.Fields) {
+				$scope.ampPage.Fields = [];
+			}
+
+			var selectedItemIndex;
+			var alreadySelected = false;
+			for (var i = 0; i < $scope.ampPage.Fields.length; i++) {
+				if ($scope.ampPage.Fields[i].FieldName === fieldName) {
+					selectedItemIndex = i;
+					alreadySelected = true;
+					break;
+				}
+			}
+
+			if (alreadySelected) {
+				$scope.ampPage.Fields.splice(selectedItemIndex, 1);
+			}
+			else {
+				$scope.ampPage.Fields.push({ FieldName: fieldName });
+			}
+		};
+
+		var loadItemTypeFields = function (itemType) {
+			StaticModuleMetaDataService.getDefaultFields(itemType).success(function (data) {
+				$scope.initialLoading = false;
+				$scope.loading = false;
+				$('body').removeClass('sfLoadingTransition');
+
+				$scope.itemTypeFields.push.apply($scope.itemTypeFields, data.Items);
+			}).error(function (data, status) {
+				$scope.initialLoading = false;
+				$scope.loading = false;
+				$('body').removeClass('sfLoadingTransition');
+
+				if (data) {
+					$scope.itemTypeFields.push.apply($scope.itemTypeFields, data.Items);
+				}
+			});
+
+			StaticModuleMetaDataService.getCustomFields(itemType).success(function (data) {
+				$scope.initialLoading = false;
+				$scope.loading = false;
+				$('body').removeClass('sfLoadingTransition');
+
+				$scope.itemTypeFields.push.apply($scope.itemTypeFields, data.Items);
+			}).error(function (data, status) {
+				$scope.initialLoading = false;
+				$scope.loading = false;
+				$('body').removeClass('sfLoadingTransition');
+
+				if (data) {
+					$scope.itemTypeFields.push.apply($scope.itemTypeFields, data.Items);
+				}
+			});
+		};
 	}]);
 
 	ampPageModule.factory('AmpService', ['$http', 'ampServiceUrl', 'ampPageId', function ($http, ampServiceUrl, ampPageId) {
@@ -134,6 +222,19 @@
 		var service = {
 			get: function () {
 				return $http.get(ampConfigServiceUrl);
+			}
+		};
+
+		return service;
+	}]);
+
+	ampPageModule.factory('StaticModuleMetaDataService', ['$http', 'staticModuleMetaDataServiceUrl', function ($http, staticModuleMetaDataServiceUrl) {
+		var service = {
+			getDefaultFields: function (itemType) {
+				return $http.get(staticModuleMetaDataServiceUrl + "/default/?contentType=" + itemType);
+			},
+			getCustomFields: function (itemType) {
+				return $http.get(staticModuleMetaDataServiceUrl + "/custom/?contentType=" + itemType);
 			}
 		};
 

@@ -52,5 +52,11 @@ namespace Telerik.Sitefinity.AMP.Web.Services.Dto
 		/// </summary>
 		/// <value>The templte path.</value>
 		public string TempltePath { get; set; }
+
+		/// <summary>
+		/// Gets or sets the page URL.
+		/// </summary>
+		/// <value>The page URL.</value>
+		public string PageUrl { get; set; }
     }
 }

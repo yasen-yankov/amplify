@@ -10,9 +10,11 @@ using System.Web;
 using System.Web.Mvc;
 using Telerik.Sitefinity.AMP;
 using Telerik.Sitefinity.AMP.Configuration;
+using Telerik.Sitefinity.AMP.Models;
 using Telerik.Sitefinity.AMP.Web.Services.Dto;
 using Telerik.Sitefinity.Configuration;
 using Telerik.Sitefinity.Data;
+using Telerik.Sitefinity.GenericContent.Model;
 using Telerik.Sitefinity.Model;
 using Telerik.Sitefinity.Utilities.TypeConverters;
 
@@ -34,19 +36,26 @@ namespace Telerik.Sitefinity.AMP.Mvc.Models
 			}
 
 			IDataItem dataItem = this.GetDataItem(ampPageData.ItemType, itemUrl);
-
-			this.ViewBag.Title = ampPageData.Title;
-
-			var fields = JsonConvert.DeserializeObject<List<AmpPageFieldDto>>(ampPageData.FieldsListJson);
+			this.SetPageData(ampPageData, (ILocatable)dataItem);
 
 			string layoutTemplatePath = GetLayoutTemplate(ampPageData.LayoutTemplatePath);
 			string templatePath = GetTemplate(ampPageData.TempltePath);
 
+			var fields = JsonConvert.DeserializeObject<List<AmpPageFieldDto>>(ampPageData.FieldsListJson).OrderBy(x => x.Ordinal);
+
 			return View(templatePath, masterName: layoutTemplatePath, model: new AmpPageViewModel
 			{
 				DataItem = dataItem,
-				Fields = fields.OrderBy(x => x.Ordinal)
+				Fields = fields
 			});
+		}
+ 
+		private void SetPageData(AmpPage ampPageData, ILocatable locatableItem)
+		{
+			this.ViewBag.Title = ampPageData.Title;
+
+			// TODO: make better concatenation
+			this.ViewBag.OriginalPageUrl = VirtualPathUtility.AppendTrailingSlash(ampPageData.PageUrl) + locatableItem.UrlName.TrimStart('/');
 		}
 
 		private static string GetTemplate(string template)

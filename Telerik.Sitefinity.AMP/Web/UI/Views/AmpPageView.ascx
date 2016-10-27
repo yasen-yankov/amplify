@@ -36,7 +36,7 @@
 						<label for="ampPageTitle" class="sfTxtLbl">Title</label>
 						<input id="ampPageTitle" type="text" ng-model="ampPage.Title" class="sfTxt" ng-change="updateUrlName(ampPage.Title)" />
 					</div>
-					<div style="float: left; padding-left: 50px;">
+					<div ng-show="ampPage.Title" style="float: left; padding-left: 50px;">
 						<label class="sfTxtLbl">AMP Page URL</label>
 						<label>/amp/{{ampPage.UrlName}}/[item URL]</label>
 					</div>
@@ -44,13 +44,13 @@
                 </li>
 				<li>
                     <label for="ampPageItemType" class="sfTxtLbl">Item Type</label>
-					<select ng-model="ampPage.ItemType" ng-options="module for module in ampConfig.EnabledBuiltInModules">
+					<select style="width: 412px;" ng-model="ampPage.ItemType" ng-options="module for module in ampConfig.EnabledBuiltInModules">
 					</select>
                 </li>
 				<li>
 					<div style="float: left;">
 						<label for="ampPageId" class="sfTxtLbl">PageId</label>
-						<input id="ampPageId" type="text" ng-model="ampPage.Id" class="sfTxt" />
+						<input id="ampPageId" type="text" ng-model="ampPage.PageId" class="sfTxt" />
 					</div>
 					<div style="float: left; padding-left: 50px;">
 						<label class="sfTxtLbl">Canonical URL in AMP page (original item URL)</label>
@@ -60,24 +60,32 @@
                 </li>
             </ul>
 
-			<ul class="sfForm">
+			<ul class="sfForm" ng-show="ampPage.ItemType">
 				<li>
-					<h3>Fields</h3>
+					<h3>AMP Page Builder</h3>
+					<h4>Select Fields</h4>
 					<div class="sfButtonArea">
 						<input type="button" value="Select" class="sfLinkBtn sfSelect" ng-click="selectFields()" />
 					</div>
 				</li>
                 <li>
 					<div class="sf-backend-wrp" style="float: left; width: 50%;">
-						<div class="list-group list-group-endless" kendo-sortable k-options="sortableOptions" k-on-change="sortFieldListItems(kendoEvent)" style="padding-right: 30px; margin-top: 20px;">
+						<div class="list-group list-group-endless" kendo-sortable k-options="sortableOptions" k-on-change="sortFieldListItems(kendoEvent)" style="padding-right: 30px; margin-top: 20px; border-right: 1px solid #eee;">
 							<div class="list-group-item list-group-item-multiselect" ng-class="{active: selectedField==field}" ng-click="fieldItemClicked(field)" ng-repeat="field in ampPage.Fields">
 								<span class="handler list-group-item-drag"></span>
 								<div><span sf-max-length="60">{{field.FieldName}}</span></div>
 							</div>
 						</div>
 					</div>
+					<div style="float: right; width: 50%;" ng-show="!selectedField && ampPage.Fields">
+						<ul style="padding-left: 30px; margin-top: 20px;">
+							<li>
+								<label class="sfTxtLbl">Click an a field to edit its properties</label>
+							</li>
+						</ul>
+					</div>
 					<div style="float: right; width: 50%;" ng-show="selectedField">
-						<ul style="padding-left: 30px; border-left: 1px solid #eee;">
+						<ul style="padding-left: 30px;">
 							<li>
 								<div style="float: left;">
 									<label for="selectedFieldTagName" class="sfTxtLbl">Wrapper Tag</label>
@@ -92,7 +100,7 @@
 							<li>
 								<div style="float: left;">
 									<label for="selectedFieldComponentType" class="sfTxtLbl">AMP Component Type</label>
-									<select style="width: 200px;" ng-model="selectedField.AmpComponent.ComponentType" ng-options="obj.value as obj.key for obj in componentTypes">
+									<select style="width: 212px;" ng-model="selectedField.AmpComponent.ComponentType" ng-options="obj.value as obj.key for obj in componentTypes">
 									</select>
 								</div>
 								<div style="float: left; padding-left: 30px;">
@@ -112,6 +120,38 @@
 				<input ng-show="isCreateMode" type="button" value="Create" class="sfLinkBtn sfSave" ng-click="create()" />
             </div>
 		</div>
+
+		<div kendo-window="selectFieldsDialog" k-modal="true" k-title="'Select fields'" k-width="425" k-animation="false"
+			k-resizable="false" k-actions="[]" k-visible="false" k-on-open="includeContent = false">
+			<div class="sfSelectorDialog">
+				<h1>Select fields</h1>
+				<div class="sfBasicDim">
+					<div class="sfContentViews">
+						<p>
+							Select fields to be included in the AMP page builder.
+						</p>
+						<div class="sf-backend-wrp">
+							<div class="list-group list-group-endless" kendo-sortable k-options="sortableOptions" k-on-change="sortFieldListItems(kendoEvent)" style="padding-right: 30px; margin-top: 20px; border-right: 1px solid #eee;">
+								<div class="list-group-item list-group-item-multiselect"
+									ng-click="fieldItemSelectionClicked(field.Name)"
+									ng-class="{active: selectedField==field}"
+									ng-repeat="field in itemTypeFields">
+									<input type="checkbox" ng-checked="isFieldItemSelected(field.Name)">
+									<div><span sf-max-length="60">{{field.Name}}</span></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="sfButtonArea">
+					<a class="sfLinkBtn sfSave" ng-click="confirmFieldSelection()"><span class="sfLinkBtnIn">
+						<asp:Literal ID="Literal4" runat="server" Text='<%$Resources:Labels, Save%>'></asp:Literal></span></a>
+					<a class="sfCancel activate-cancel" ng-click="cancelFieldSelection()">
+						<asp:Literal ID="Literal5" runat="server" Text="<%$Resources:Labels, Cancel %>"></asp:Literal>
+					</a>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -121,10 +161,12 @@
 	angular.module("AmpPageModule").value("ampPageId", "<%= hdfAmpPageId.Value%>");
 	angular.module("AmpPageModule").value("isCreateMode", "<%= hdfIsCreateMode.Value%>");
 	angular.module("AmpPageModule").value("ampGroupPageUrl", "<%= hdfAmpGroupPageUrl.Value%>");
+	angular.module("AmpPageModule").value("staticModuleMetaDataServiceUrl", "<%= hdfStaticModuleMetaDataServiceUrl.Value%>");
 </script>
 
 <asp:HiddenField runat="server" ID="hdfAmpServiceUrl" />
 <asp:HiddenField runat="server" ID="hdfAmpConfigServiceUrl" />
+<asp:HiddenField runat="server" ID="hdfStaticModuleMetaDataServiceUrl" />
 <asp:HiddenField runat="server" ID="hdfAmpPageId" />
 <asp:HiddenField runat="server" ID="hdfIsCreateMode" />
 <asp:HiddenField runat="server" ID="hdfAmpGroupPageUrl" />
