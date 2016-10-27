@@ -50,7 +50,7 @@
 				<li>
 					<div style="float: left;">
 						<label for="ampPageId" class="sfTxtLbl">PageId</label>
-						<input id="ampPageId" type="text" ng-model="ampPage.Id" class="sfTxt" />
+						<input id="ampPageId" type="text" ng-model="ampPage.PageId" class="sfTxt" />
 					</div>
 					<div style="float: left; padding-left: 50px;">
 						<label class="sfTxtLbl">Canonical URL in AMP page (original item URL)</label>
@@ -132,9 +132,12 @@
 						</p>
 						<div class="sf-backend-wrp">
 							<div class="list-group list-group-endless" kendo-sortable k-options="sortableOptions" k-on-change="sortFieldListItems(kendoEvent)" style="padding-right: 30px; margin-top: 20px; border-right: 1px solid #eee;">
-								<div class="list-group-item list-group-item-multiselect" ng-class="{active: selectedField==field}" ng-repeat="field in itemTypeFields">
-									<span class="handler list-group-item-drag"></span>
-									<div><span sf-max-length="60">{{field.FieldName}}</span></div>
+								<div class="list-group-item list-group-item-multiselect"
+									ng-click="fieldItemSelectionClicked(field.Name)"
+									ng-class="{active: selectedField==field}"
+									ng-repeat="field in itemTypeFields">
+									<input type="checkbox" ng-checked="isFieldItemSelected(field.Name)">
+									<div><span sf-max-length="60">{{field.Name}}</span></div>
 								</div>
 							</div>
 						</div>
@@ -158,11 +161,12 @@
 	angular.module("AmpPageModule").value("ampPageId", "<%= hdfAmpPageId.Value%>");
 	angular.module("AmpPageModule").value("isCreateMode", "<%= hdfIsCreateMode.Value%>");
 	angular.module("AmpPageModule").value("ampGroupPageUrl", "<%= hdfAmpGroupPageUrl.Value%>");
-	angular.module("AmpPageModule").value("staticModuleMetaDataServiceUrl", "/Sitefinity/Services/MetaData/ModuleEditor.svc");
+	angular.module("AmpPageModule").value("staticModuleMetaDataServiceUrl", "<%= hdfStaticModuleMetaDataServiceUrl.Value%>");
 </script>
 
 <asp:HiddenField runat="server" ID="hdfAmpServiceUrl" />
 <asp:HiddenField runat="server" ID="hdfAmpConfigServiceUrl" />
+<asp:HiddenField runat="server" ID="hdfStaticModuleMetaDataServiceUrl" />
 <asp:HiddenField runat="server" ID="hdfAmpPageId" />
 <asp:HiddenField runat="server" ID="hdfIsCreateMode" />
 <asp:HiddenField runat="server" ID="hdfAmpGroupPageUrl" />

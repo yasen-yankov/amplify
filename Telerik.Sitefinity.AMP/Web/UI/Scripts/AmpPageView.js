@@ -115,11 +115,16 @@
 		};
 
 		$scope.selectFields = function () {
-			loadItemTypeFields($scope);
+			loadItemTypeFields($scope.ampPage.ItemType);
 
 			$scope.selectFieldsDialog.center();
 			$scope.selectFieldsDialog.wrapper[0].style.top = "50px";
 			$scope.selectFieldsDialog.open();
+		};
+
+		$scope.confirmFieldSelection = function () {
+			$scope.includeContent = false;
+			$scope.selectFieldsDialog.close();
 		};
 
 		$scope.cancelFieldSelection = function () {
@@ -127,8 +132,43 @@
 			$scope.selectFieldsDialog.close();
 		};
 
-		var loadItemTypeFields = function ($scope) {
-			StaticModuleMetaDataService.getDefaultFields().success(function (data) {
+		$scope.isFieldItemSelected = function (fieldName) {
+			if ($scope.ampPage.Fields) {
+				for (var i = 0; i < $scope.ampPage.Fields.length; i++) {
+					if ($scope.ampPage.Fields[i].FieldName === fieldName) {
+						return true;
+					}
+				}
+			}
+
+			return false;
+		};
+
+		$scope.fieldItemSelectionClicked = function (fieldName) {
+			if (!$scope.ampPage.Fields) {
+				$scope.ampPage.Fields = [];
+			}
+
+			var selectedItemIndex;
+			var alreadySelected = false;
+			for (var i = 0; i < $scope.ampPage.Fields.length; i++) {
+				if ($scope.ampPage.Fields[i].FieldName === fieldName) {
+					selectedItemIndex = i;
+					alreadySelected = true;
+					break;
+				}
+			}
+
+			if (alreadySelected) {
+				$scope.ampPage.Fields.splice(selectedItemIndex, 1);
+			}
+			else {
+				$scope.ampPage.Fields.push({ FieldName: fieldName });
+			}
+		};
+
+		var loadItemTypeFields = function (itemType) {
+			StaticModuleMetaDataService.getDefaultFields(itemType).success(function (data) {
 				$scope.initialLoading = false;
 				$scope.loading = false;
 				$('body').removeClass('sfLoadingTransition');
@@ -144,7 +184,7 @@
 				}
 			});
 
-			StaticModuleMetaDataService.getCustomFields().success(function (data) {
+			StaticModuleMetaDataService.getCustomFields(itemType).success(function (data) {
 				$scope.initialLoading = false;
 				$scope.loading = false;
 				$('body').removeClass('sfLoadingTransition');
@@ -190,11 +230,11 @@
 
 	ampPageModule.factory('StaticModuleMetaDataService', ['$http', 'staticModuleMetaDataServiceUrl', function ($http, staticModuleMetaDataServiceUrl) {
 		var service = {
-			getDefaultFields: function () {
-				return $http.get(staticModuleMetaDataServiceUrl + "/default/", { params: { contentType: $scope.ampPage.ItemType } });
+			getDefaultFields: function (itemType) {
+				return $http.get(staticModuleMetaDataServiceUrl + "/default/?contentType=" + itemType);
 			},
-			getCustomFields: function () {
-				return $http.get(staticModuleMetaDataServiceUrl + "/custom/", { params: { contentType: $scope.ampPage.ItemType } });
+			getCustomFields: function (itemType) {
+				return $http.get(staticModuleMetaDataServiceUrl + "/custom/?contentType=" + itemType);
 			}
 		};
 

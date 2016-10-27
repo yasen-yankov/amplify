@@ -66,6 +66,14 @@ namespace Telerik.Sitefinity.AMP.Web.UI
 			}
 		}
 
+        protected HiddenField StaticModuleMetaDataServiceUrlHiddenField
+		{
+			get
+			{
+				return this.Container.GetControl<HiddenField>("hdfStaticModuleMetaDataServiceUrl", true);
+			}
+		}
+
 		protected HiddenField AmpGroupPageUrlHiddenField
 		{
 			get
@@ -180,6 +188,7 @@ namespace Telerik.Sitefinity.AMP.Web.UI
 
 			this.AmpServiceUrlHiddenField.Value = VirtualPathUtility.ToAbsolute("~/RestApi/" + AmpServiceStackPlugin.AmpPagesRoute);
             this.AmpConfigServiceUrlHiddenField.Value = VirtualPathUtility.ToAbsolute("~/RestApi/" + AmpServiceStackPlugin.AmpConfigurationRoute);
+            this.StaticModuleMetaDataServiceUrlHiddenField.Value = VirtualPathUtility.ToAbsolute("~/Sitefinity/Services/MetaData/ModuleEditor.svc");
         }
  
         private void ReturnPageNotFoundResponse(Page page)
