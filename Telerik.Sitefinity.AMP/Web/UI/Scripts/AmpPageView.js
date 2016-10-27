@@ -3,10 +3,11 @@
 
 	var ampPageModule = angular.module('AmpPageModule', ["kendo.directives"]);
 
-	ampPageModule.controller("AmpPageController", ['$scope', '$window', 'AmpService', 'AmpConfigService', 'ampPageId', 'ampGroupPageUrl', 'isCreateMode', function ($scope, $window, AmpService, AmpConfigService, ampPageId, ampGroupPageUrl, isCreateMode) {
+	ampPageModule.controller("AmpPageController", ['$scope', '$window', 'AmpService', 'AmpConfigService', 'StaticModuleMetaDataService', 'ampPageId', 'ampGroupPageUrl', 'isCreateMode', function ($scope, $window, AmpService, AmpConfigService, StaticModuleMetaDataService, ampPageId, ampGroupPageUrl, isCreateMode) {
 		$scope.ampPageId = ampPageId;
 		$scope.ampGroupPageUrl = ampGroupPageUrl;
 		$scope.isCreateMode = (isCreateMode.toLowerCase() === "true");
+		$scope.itemTypeFields = [];
 
 		var loadAmpConfig = function () {
 			AmpConfigService.get().success(function (data) {
@@ -114,6 +115,8 @@
 		};
 
 		$scope.selectFields = function () {
+			loadItemTypeFields($scope);
+
 			$scope.selectFieldsDialog.center();
 			$scope.selectFieldsDialog.wrapper[0].style.top = "50px";
 			$scope.selectFieldsDialog.open();
@@ -122,6 +125,40 @@
 		$scope.cancelFieldSelection = function () {
 			$scope.includeContent = false;
 			$scope.selectFieldsDialog.close();
+		};
+
+		var loadItemTypeFields = function ($scope) {
+			StaticModuleMetaDataService.getDefaultFields().success(function (data) {
+				$scope.initialLoading = false;
+				$scope.loading = false;
+				$('body').removeClass('sfLoadingTransition');
+
+				$scope.itemTypeFields.push.apply($scope.itemTypeFields, data.Items);
+			}).error(function (data, status) {
+				$scope.initialLoading = false;
+				$scope.loading = false;
+				$('body').removeClass('sfLoadingTransition');
+
+				if (data) {
+					$scope.itemTypeFields.push.apply($scope.itemTypeFields, data.Items);
+				}
+			});
+
+			StaticModuleMetaDataService.getCustomFields().success(function (data) {
+				$scope.initialLoading = false;
+				$scope.loading = false;
+				$('body').removeClass('sfLoadingTransition');
+
+				$scope.itemTypeFields.push.apply($scope.itemTypeFields, data.Items);
+			}).error(function (data, status) {
+				$scope.initialLoading = false;
+				$scope.loading = false;
+				$('body').removeClass('sfLoadingTransition');
+
+				if (data) {
+					$scope.itemTypeFields.push.apply($scope.itemTypeFields, data.Items);
+				}
+			});
 		};
 	}]);
 
@@ -145,6 +182,19 @@
 		var service = {
 			get: function () {
 				return $http.get(ampConfigServiceUrl);
+			}
+		};
+
+		return service;
+	}]);
+
+	ampPageModule.factory('StaticModuleMetaDataService', ['$http', 'staticModuleMetaDataServiceUrl', function ($http, staticModuleMetaDataServiceUrl) {
+		var service = {
+			getDefaultFields: function () {
+				return $http.get(staticModuleMetaDataServiceUrl + "/default/", { params: { contentType: $scope.ampPage.ItemType } });
+			},
+			getCustomFields: function () {
+				return $http.get(staticModuleMetaDataServiceUrl + "/custom/", { params: { contentType: $scope.ampPage.ItemType } });
 			}
 		};
 

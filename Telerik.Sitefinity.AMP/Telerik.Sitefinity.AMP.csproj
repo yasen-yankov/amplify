@@ -241,7 +241,6 @@
     <Content Include="Mvc\Models\readme.txt" />
     <Content Include="Mvc\Views\readme.txt" />
     <Content Include="Web\Scripts\readme.txt" />
-    <Content Include="Web\UI\readme.txt" />
     <EmbeddedResource Include="Web\UI\Scripts\AmpPagesView.js" />
     <EmbeddedResource Include="Web\UI\Views\AmpPagesView.ascx">
       <SubType>ASPXCodeBehind</SubType>

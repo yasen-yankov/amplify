@@ -62,7 +62,8 @@
 
 			<ul class="sfForm" ng-show="ampPage.ItemType">
 				<li>
-					<h3>Fields</h3>
+					<h3>AMP Page Builder</h3>
+					<h4>Select Fields</h4>
 					<div class="sfButtonArea">
 						<input type="button" value="Select" class="sfLinkBtn sfSelect" ng-click="selectFields()" />
 					</div>
@@ -76,7 +77,7 @@
 							</div>
 						</div>
 					</div>
-					<div style="float: right; width: 50%;" ng-show="!selectedField">
+					<div style="float: right; width: 50%;" ng-show="!selectedField && ampPage.Fields">
 						<ul style="padding-left: 30px; margin-top: 20px;">
 							<li>
 								<label class="sfTxtLbl">Click an a field to edit its properties</label>
@@ -131,7 +132,7 @@
 						</p>
 						<div class="sf-backend-wrp">
 							<div class="list-group list-group-endless" kendo-sortable k-options="sortableOptions" k-on-change="sortFieldListItems(kendoEvent)" style="padding-right: 30px; margin-top: 20px; border-right: 1px solid #eee;">
-								<div class="list-group-item list-group-item-multiselect" ng-class="{active: selectedField==field}" ng-click="fieldItemClicked(field)" ng-repeat="field in ampPage.Fields">
+								<div class="list-group-item list-group-item-multiselect" ng-class="{active: selectedField==field}" ng-repeat="field in itemTypeFields">
 									<span class="handler list-group-item-drag"></span>
 									<div><span sf-max-length="60">{{field.FieldName}}</span></div>
 								</div>
@@ -157,6 +158,7 @@
 	angular.module("AmpPageModule").value("ampPageId", "<%= hdfAmpPageId.Value%>");
 	angular.module("AmpPageModule").value("isCreateMode", "<%= hdfIsCreateMode.Value%>");
 	angular.module("AmpPageModule").value("ampGroupPageUrl", "<%= hdfAmpGroupPageUrl.Value%>");
+	angular.module("AmpPageModule").value("staticModuleMetaDataServiceUrl", "/Sitefinity/Services/MetaData/ModuleEditor.svc");
 </script>
 
 <asp:HiddenField runat="server" ID="hdfAmpServiceUrl" />
