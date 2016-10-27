@@ -14,6 +14,7 @@ using Telerik.Sitefinity.AMP.Models;
 using Telerik.Sitefinity.AMP.Web.Services.Dto;
 using Telerik.Sitefinity.Configuration;
 using Telerik.Sitefinity.Data;
+using Telerik.Sitefinity.GenericContent.Model;
 using Telerik.Sitefinity.Model;
 using Telerik.Sitefinity.Utilities.TypeConverters;
 
@@ -34,13 +35,13 @@ namespace Telerik.Sitefinity.AMP.Mvc.Models
 				return this.HttpNotFound(string.Format("There is no AMP page with url: {0}", ampPageUrl));
 			}
 
-			this.SetPageData(ampPageData);
+			IDataItem dataItem = this.GetDataItem(ampPageData.ItemType, itemUrl);
+			this.SetPageData(ampPageData, (ILocatable)dataItem);
 
 			string layoutTemplatePath = GetLayoutTemplate(ampPageData.LayoutTemplatePath);
 			string templatePath = GetTemplate(ampPageData.TempltePath);
 
 			var fields = JsonConvert.DeserializeObject<List<AmpPageFieldDto>>(ampPageData.FieldsListJson).OrderBy(x => x.Ordinal);
-			IDataItem dataItem = this.GetDataItem(ampPageData.ItemType, itemUrl);
 
 			return View(templatePath, masterName: layoutTemplatePath, model: new AmpPageViewModel
 			{
@@ -49,10 +50,12 @@ namespace Telerik.Sitefinity.AMP.Mvc.Models
 			});
 		}
  
-		private void SetPageData(AmpPage ampPageData)
+		private void SetPageData(AmpPage ampPageData, ILocatable locatableItem)
 		{
 			this.ViewBag.Title = ampPageData.Title;
-			this.ViewBag.OriginalPageUrl = ampPageData.PageUrl;
+
+			// TODO: make better concatenation
+			this.ViewBag.OriginalPageUrl = VirtualPathUtility.AppendTrailingSlash(ampPageData.PageUrl) + locatableItem.UrlName.TrimStart('/');
 		}
 
 		private static string GetTemplate(string template)
