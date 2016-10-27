@@ -8,6 +8,7 @@
 		$scope.ampGroupPageUrl = ampGroupPageUrl;
 		$scope.isCreateMode = (isCreateMode.toLowerCase() === "true");
 		$scope.itemTypeFields = [];
+		$scope.useCustomLayout = false;
 
 		var loadAmpConfig = function () {
 			AmpConfigService.get().success(function (data) {
@@ -17,7 +18,6 @@
 
 				$scope.ampConfig = data;
 				$scope.componentTypes = getComponentArray($scope.ampConfig.AmpComponentTypes);
-				$scope.componentTypes.push({ "key": "PlainText", "value": "" });
 			}).error(function (data, status) {
 				$scope.initialLoading = false;
 				$scope.loading = false;
@@ -26,7 +26,6 @@
 				if (data) {
 					$scope.ampConfig = data;
 					$scope.componentTypes = getComponentArray($scope.ampConfig.AmpComponentTypes);
-					$scope.componentTypes.unshift({ "key": "PlainText", "value": "" });
 				}
 			});
 		};
@@ -50,13 +49,15 @@
 				$('body').removeClass('sfLoadingTransition');
 
 				$scope.ampPage = data[0];
+				$scope.useCustomLayout = $scope.ampPage.TemplatePath || $scope.ampPage.LayoutTemplatePath;
 			}).error(function (data, status) {
 				$scope.initialLoading = false;
 				$scope.loading = false;
 				$('body').removeClass('sfLoadingTransition');
 
 				if (data) {
-					$scope.ampPage = data[0];
+				    $scope.ampPage = data[0];
+				    $scope.useCustomLayout = $scope.ampPage.TemplatePath || $scope.ampPage.LayoutTemplatePath;
 				}
 			});
 		};
@@ -168,6 +169,8 @@
 		};
 
 		var loadItemTypeFields = function (itemType) {
+			$scope.itemTypeFields = [];
+
 			StaticModuleMetaDataService.getDefaultFields(itemType).success(function (data) {
 				$scope.initialLoading = false;
 				$scope.loading = false;

@@ -47,28 +47,16 @@
 					<select style="width: 412px;" ng-model="ampPage.ItemType" ng-options="module for module in ampConfig.EnabledBuiltInModules">
 					</select>
                 </li>
-				<li>
-					<div style="float: left;">
-						<label for="ampPageId" class="sfTxtLbl">PageId</label>
-						<input id="ampPageId" type="text" ng-model="ampPage.PageId" class="sfTxt" />
-					</div>
-					<div>
-						<label for="ampPageUrl" class="sfTxtLbl">PageUrl</label>
+                <li>
+                    <div style="float: left;">
+						<label for="ampPageUrl" class="sfTxtLbl">Original Item Page Url</label>
 						<input id="ampPageUrl" type="text" ng-model="ampPage.PageUrl" class="sfTxt" />
 					</div>
-					<div>
-						<label for="ampPageLayoutTemplatePath" class="sfTxtLbl">LayoutTemplatePath</label>
-						<input id="ampPageLayoutTemplatePath" type="text" ng-model="ampPage.LayoutTemplatePath" class="sfTxt" />
-					</div>
-					<div>
-						<label for="ampPageTemplatePath" class="sfTxtLbl">TemplatePath</label>
-						<input id="ampPageTemplatePath" type="text" ng-model="ampPage.TemplatePath" class="sfTxt" />
-					</div>
-					<div style="float: left; padding-left: 50px;">
+                    <div style="float: left; padding-left: 50px;">
 						<label class="sfTxtLbl">Canonical URL in AMP page (original item URL)</label>
-						<label>/page-url/[item URL]</label>
+						<label>{{ampPage.PageUrl}}/[item URL]</label>
 					</div>
-					<div style="clear: both;"></div>
+                    <div style="clear: both;"></div>
                 </li>
             </ul>
 
@@ -124,6 +112,18 @@
 						</ul>
 					</div>
 					<div style="clear: both;"></div>
+                </li>
+                <li>
+                    <input id="cbUseCustomLayout" type="checkbox" ng-model="useCustomLayout" />
+                    <label for="cbUseCustomLayout">Use custom layout</label>
+                </li>
+                <li ng-show="useCustomLayout">
+					<label for="ampPageLayoutTemplatePath" class="sfTxtLbl">LayoutTemplatePath</label>
+					<input id="ampPageLayoutTemplatePath" type="text" ng-model="ampPage.LayoutTemplatePath" class="sfTxt" />
+                </li>
+                <li ng-show="useCustomLayout">
+					<label for="ampPageTemplatePath" class="sfTxtLbl">TemplatePath</label>
+					<input id="ampPageTemplatePath" type="text" ng-model="ampPage.TemplatePath" class="sfTxt" />
                 </li>
             </ul>
 
