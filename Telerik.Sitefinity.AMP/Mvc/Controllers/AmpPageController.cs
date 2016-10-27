@@ -16,6 +16,7 @@ using Telerik.Sitefinity.Configuration;
 using Telerik.Sitefinity.Data;
 using Telerik.Sitefinity.GenericContent.Model;
 using Telerik.Sitefinity.Model;
+using Telerik.Sitefinity.Modules.GenericContent;
 using Telerik.Sitefinity.Utilities.TypeConverters;
 
 namespace Telerik.Sitefinity.AMP.Mvc.Models
@@ -84,7 +85,7 @@ namespace Telerik.Sitefinity.AMP.Mvc.Models
 			var manager = ManagerBase.GetMappedManager(itemType);
 
 			string redirectUrl;
-			var dataItem = ((IUrlProvider)manager.Provider).GetItemFromUrl(itemType, itemUrl, out redirectUrl);
+			var dataItem = ((UrlDataProviderBase)manager.Provider).GetItemFromUrl(itemType, itemUrl, true, out redirectUrl);
 
 			return dataItem;
 		}

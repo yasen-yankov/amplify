@@ -135,7 +135,8 @@
 
 		$scope.addExpression = function () {
 			if ($scope.expression) {
-				$scope.ampPage.Fields.push({ FieldName: $scope.expression, Ordinal: $scope.ampPage.Fields.length });
+				$scope.ampPage.Fields.push({ FieldName: $scope.expression, Ordinal: $scope.ampPage.Fields.length + 1 });
+				$scope.expression = '';
 			}
 		}
 
