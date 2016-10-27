@@ -3,10 +3,10 @@
 
 	var ampPageModule = angular.module('AmpPageModule', ["kendo.directives"]);
 
-	ampPageModule.controller("AmpPageController", ['$scope', 'AmpService', 'AmpConfigService', 'ampPageId', 'ampGroupPageUrl', 'isCreateMode', function ($scope, AmpService, AmpConfigService, ampPageId, ampGroupPageUrl, isCreateMode) {
+	ampPageModule.controller("AmpPageController", ['$scope', '$window', 'AmpService', 'AmpConfigService', 'ampPageId', 'ampGroupPageUrl', 'isCreateMode', function ($scope, $window, AmpService, AmpConfigService, ampPageId, ampGroupPageUrl, isCreateMode) {
 		$scope.ampPageId = ampPageId;
 		$scope.ampGroupPageUrl = ampGroupPageUrl;
-		$scope.isCreateMode = (isCreateMode === "true");
+		$scope.isCreateMode = (isCreateMode.toLowerCase() === "true");
 
 		var loadAmpConfig = function () {
 			AmpConfigService.get().success(function (data) {
@@ -89,7 +89,15 @@
 		};
 
 		$scope.save = function () {
-			AmpService.post($scope.ampPage);
+			AmpService.post($scope.ampPage).success(function (data) {
+				$window.location.href = $scope.ampGroupPageUrl;
+			});
+		};
+
+		$scope.create = function () {
+			AmpService.put($scope.ampPage).success(function (data) {
+				$window.location.href = $scope.ampGroupPageUrl;
+			});
 		};
 
 		$scope.sortableOptions = {
@@ -113,6 +121,9 @@
 			},
 			post: function (data) {
 				return $http.post(ampServiceUrl + "/" + ampPageId, data);
+			},
+			put: function (data) {
+				return $http.put(ampServiceUrl, data);
 			}
 		};
 

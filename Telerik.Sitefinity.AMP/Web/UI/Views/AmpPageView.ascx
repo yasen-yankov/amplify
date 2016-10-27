@@ -92,7 +92,7 @@
 							<li>
 								<div style="float: left;">
 									<label for="selectedFieldComponentType" class="sfTxtLbl">AMP Component Type</label>
-									<select ng-model="selectedField.AmpComponent.ComponentType" ng-options="obj.value as obj.key for obj in componentTypes">
+									<select style="width: 200px;" ng-model="selectedField.AmpComponent.ComponentType" ng-options="obj.value as obj.key for obj in componentTypes">
 									</select>
 								</div>
 								<div style="float: left; padding-left: 30px;">
@@ -108,7 +108,8 @@
             </ul>
 
 			<div class="sfButtonArea">
-                <input type="button" value="Save" class="sfLinkBtn sfSave" ng-click="save()" />
+                <input ng-hide="isCreateMode" type="button" value="Save" class="sfLinkBtn sfSave" ng-click="save()" />
+				<input ng-show="isCreateMode" type="button" value="Create" class="sfLinkBtn sfSave" ng-click="create()" />
             </div>
 		</div>
 	</div>
