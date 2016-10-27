@@ -113,6 +113,12 @@ namespace Telerik.Sitefinity.AMP.Models
         /// </summary>
         public Guid PageId { get; set; }
 
+		/// <summary>
+		/// Gets or sets the page URL.
+		/// </summary>
+		/// <value>The page URL.</value>
+		public string PageUrl { get; set; }
+
         /// <summary>
         /// Gets or sets the FieldsListJSON.
         /// </summary>

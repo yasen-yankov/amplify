@@ -6,8 +6,8 @@ using Telerik.Sitefinity.AMP.Models;
 
 namespace Telerik.Sitefinity.AMP.Web.Services.Dto
 {
-    internal class AmpPageDto
-    {
+	internal class AmpPageDto
+	{
         public AmpPageDto()
         {
         }
@@ -27,6 +27,7 @@ namespace Telerik.Sitefinity.AMP.Web.Services.Dto
             this.UrlName = ampPage.UrlName;
 			this.TempltePath = ampPage.TempltePath;
 			this.LayoutTemplatePath = ampPage.LayoutTemplatePath;
+			this.PageUrl = ampPage.PageUrl;
         }
 
         public AmpPageDto(AmpPageInsertRequest ampPageInsertRequest)
@@ -43,6 +44,7 @@ namespace Telerik.Sitefinity.AMP.Web.Services.Dto
             this.UrlName = ampPageInsertRequest.UrlName;
 			this.TempltePath = ampPageInsertRequest.TempltePath;
 			this.LayoutTemplatePath = ampPageInsertRequest.LayoutTemplatePath;
+			this.PageUrl = ampPageInsertRequest.PageUrl;
         }
 
         public AmpPageDto(AmpPageUpdateRequest ampPageUpdateRequest)
@@ -60,6 +62,7 @@ namespace Telerik.Sitefinity.AMP.Web.Services.Dto
             this.UrlName = ampPageUpdateRequest.UrlName;
 			this.TempltePath = ampPageUpdateRequest.TempltePath;
 			this.LayoutTemplatePath = ampPageUpdateRequest.LayoutTemplatePath;
+			this.PageUrl = ampPageUpdateRequest.PageUrl;
         }
 
         public void ToAmpPage(AmpPage ampPage)
@@ -71,6 +74,7 @@ namespace Telerik.Sitefinity.AMP.Web.Services.Dto
             ampPage.UrlName = this.UrlName;
 			ampPage.LayoutTemplatePath = this.LayoutTemplatePath;
 			ampPage.TempltePath = this.TempltePath;
+			ampPage.PageUrl = this.PageUrl;
         }
 
         /// <summary>
@@ -115,5 +119,11 @@ namespace Telerik.Sitefinity.AMP.Web.Services.Dto
 		/// </summary>
 		/// <value>The templte path.</value>
 		public string TempltePath { get; set; }
-    }
+
+		/// <summary>
+		/// Gets or sets the page URL.
+		/// </summary>
+		/// <value>The page URL.</value>
+		public string PageUrl { get; set; }
+	}
 }
