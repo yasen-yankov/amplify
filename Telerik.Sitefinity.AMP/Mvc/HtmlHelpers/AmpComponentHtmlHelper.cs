@@ -15,6 +15,7 @@ using Telerik.Sitefinity.Web;
 using Telerik.Sitefinity.Web.Utilities;
 using Telerik.Sitefinity.RelatedData;
 using System.Web.UI;
+using Telerik.Sitefinity.Utilities.TypeConverters;
 
 namespace Telerik.Sitefinity.AMP.Mvc.HtmlHelpers
 {
@@ -54,7 +55,7 @@ namespace Telerik.Sitefinity.AMP.Mvc.HtmlHelpers
 			}
 			else
 			{
-				var componentType = Type.GetType(ampComponent.ComponentType);
+				var componentType = TypeResolutionService.ResolveType(ampComponent.ComponentType);
 				var ampComponentGenerator = (IAmpComponent)Activator.CreateInstance(componentType);
 				ampHtml = ampComponentGenerator.Generate(fieldValue);
 			}
