@@ -8,6 +8,15 @@ using Telerik.Sitefinity.Localization;
 using Telerik.Sitefinity.Modules.GenericContent.Configuration;
 using Telerik.Sitefinity.Web.Configuration;
 using Telerik.Sitefinity.AMP.Data.OpenAccess;
+using Telerik.Sitefinity.AMP.AmpComponents;
+using Telerik.Sitefinity.Modules.Blogs;
+using Telerik.Sitefinity.Modules.News;
+using Telerik.Sitefinity.Modules.Events;
+using Telerik.Sitefinity.Modules.Lists;
+using Telerik.Sitefinity.Blogs.Model;
+using Telerik.Sitefinity.Events.Model;
+using Telerik.Sitefinity.Lists.Model;
+using Telerik.Sitefinity.News.Model;
 
 namespace Telerik.Sitefinity.AMP.Configuration
 {
@@ -30,6 +39,18 @@ namespace Telerik.Sitefinity.AMP.Configuration
             });
         }
 
+		protected override void OnPropertiesInitialized()
+		{
+			base.OnPropertiesInitialized();
+
+			this.EnabledBuiltInModues.Add(new ConfigValue<string>(typeof(BlogPost).FullName, this.EnabledBuiltInModues));
+			this.EnabledBuiltInModues.Add(new ConfigValue<string>(typeof(NewsItem).FullName, this.EnabledBuiltInModues));
+			this.EnabledBuiltInModues.Add(new ConfigValue<string>(typeof(Event).FullName, this.EnabledBuiltInModues));
+			this.EnabledBuiltInModues.Add(new ConfigValue<string>(typeof(List).FullName, this.EnabledBuiltInModues));
+
+			this.AmpComponents.Add("Image", typeof(ImageAmpComponent).AssemblyQualifiedName);
+		}
+
         /// <summary>
         /// Gets or sets the name of the default data provider. 
         /// </summary>
@@ -47,5 +68,31 @@ namespace Telerik.Sitefinity.AMP.Configuration
             }
         }
 	    #endregion
-    }
+
+		[ConfigurationProperty("enabledBuiltInModues")]
+		public ConfigElementList<ConfigValue<string>> EnabledBuiltInModues
+		{
+			get
+			{
+				return (ConfigElementList<ConfigValue<string>>)this["enabledBuiltInModues"];
+			}
+			set
+			{
+				this["enabledBuiltInModues"] = value;
+			}
+		}
+
+		[ConfigurationProperty("ampComponents")]
+		public ConfigValueDictionary AmpComponents
+		{
+			get
+			{
+				return (ConfigValueDictionary)this["ampComponents"];
+			}
+			set
+			{
+				this["ampComponents"] = value;
+			}
+		}
+	}
 }

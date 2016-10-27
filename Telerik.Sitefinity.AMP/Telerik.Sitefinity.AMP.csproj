@@ -130,6 +130,15 @@
     <Reference Include="Telerik.Sitefinity">
       <HintPath>..\packages\Telerik.Sitefinity.Core.9.2.6200.0\lib\net45\Telerik.Sitefinity.dll</HintPath>
     </Reference>
+    <Reference Include="Telerik.Sitefinity.ContentModules">
+      <HintPath>..\packages\Telerik.Sitefinity.Content.9.2.6200.0\lib\net45\Telerik.Sitefinity.ContentModules.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Sitefinity.Ecommerce">
+      <HintPath>..\packages\Telerik.Sitefinity.Content.9.2.6200.0\lib\net45\Telerik.Sitefinity.Ecommerce.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Sitefinity.Forums">
+      <HintPath>..\packages\Telerik.Sitefinity.Content.9.2.6200.0\lib\net45\Telerik.Sitefinity.Forums.dll</HintPath>
+    </Reference>
     <Reference Include="Telerik.Sitefinity.Frontend">
       <HintPath>..\packages\Telerik.Sitefinity.Feather.Core.1.7.600.0\lib\net45\Telerik.Sitefinity.Frontend.dll</HintPath>
     </Reference>
@@ -141,6 +150,15 @@
     </Reference>
     <Reference Include="Telerik.Sitefinity.Mvc">
       <HintPath>..\packages\Telerik.Sitefinity.Mvc.1.7.600.0\lib\net45\Telerik.Sitefinity.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Sitefinity.RecurrentRules">
+      <HintPath>..\packages\Telerik.Sitefinity.Content.9.2.6200.0\lib\net45\Telerik.Sitefinity.RecurrentRules.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Sitefinity.SiteSync">
+      <HintPath>..\packages\Telerik.Sitefinity.SiteSync.9.2.6200.0\lib\net45\Telerik.Sitefinity.SiteSync.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Sitefinity.SiteSync.Impl">
+      <HintPath>..\packages\Telerik.Sitefinity.SiteSync.9.2.6200.0\lib\net45\Telerik.Sitefinity.SiteSync.Impl.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Sitefinity.Utilities">
       <HintPath>..\packages\Telerik.Sitefinity.Core.9.2.6200.0\lib\net45\Telerik.Sitefinity.Utilities.dll</HintPath>
@@ -168,6 +186,8 @@
     <Compile Include="Mvc\Controllers\AmpPageDataModel.cs" />
     <Compile Include="Mvc\HtmlHelpers\AmpComponentHtmlHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web\Services\Dto\AmpConfigurationDto.cs" />
+    <Compile Include="Web\Services\Dto\AmpConfigurationREquest.cs" />
     <Compile Include="Web\Services\AmpServiceStackPlugin.cs" />
     <Compile Include="Web\Services\AmpWebService.cs" />
     <Compile Include="Web\Services\Dto\AmpComponentDto.cs" />
