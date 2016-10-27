@@ -47,16 +47,16 @@
 					<select style="width: 412px;" ng-model="ampPage.ItemType" ng-options="module for module in ampConfig.EnabledBuiltInModules">
 					</select>
                 </li>
-                <li>
-                    <div style="float: left;">
+				<li>
+					<div style="float: left;">
 						<label for="ampPageUrl" class="sfTxtLbl">Original Item Page Url</label>
 						<input id="ampPageUrl" type="text" ng-model="ampPage.PageUrl" class="sfTxt" />
 					</div>
-                    <div style="float: left; padding-left: 50px;">
+					<div style="float: left; padding-left: 50px;">
 						<label class="sfTxtLbl">Canonical URL in AMP page (original item URL)</label>
 						<label>{{ampPage.PageUrl}}/[item URL]</label>
 					</div>
-                    <div style="clear: both;"></div>
+					<div style="clear: both;"></div>
                 </li>
             </ul>
 
@@ -73,7 +73,7 @@
 						<div class="list-group list-group-endless" kendo-sortable k-options="sortableOptions" k-on-change="sortFieldListItems(kendoEvent)" style="padding-right: 30px; margin-top: 20px; border-right: 1px solid #eee;">
 							<div class="list-group-item list-group-item-multiselect" ng-class="{active: selectedField==field}" ng-click="fieldItemClicked(field)" ng-repeat="field in ampPage.Fields">
 								<span class="handler list-group-item-drag"></span>
-								<div><span sf-max-length="60">{{field.FieldName}}</span></div>
+								<div><span sf-max-length="60">{{field.FieldName}}</span><a href="#" style="float: right" ng-click="removeField(field.FieldName)">X</a></div>
 							</div>
 						</div>
 					</div>
@@ -113,7 +113,12 @@
 					</div>
 					<div style="clear: both;"></div>
                 </li>
-                <li>
+				<li>
+					<label for="expression" class="sfTxtLbl">Add custom expression:</label>
+					<input type="text" class="sfTxt" ng-model="expression" />
+					<input type="button" value="Add Expression" class="sfLinkBtn sfSelect" ng-click="addExpression()" />
+				</li>
+				<li>
                     <input id="cbUseCustomLayout" type="checkbox" ng-model="useCustomLayout" />
                     <label for="cbUseCustomLayout">Use custom layout</label>
                 </li>

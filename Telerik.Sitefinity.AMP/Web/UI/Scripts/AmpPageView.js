@@ -133,6 +133,22 @@
 			$scope.selectFieldsDialog.close();
 		};
 
+		$scope.addExpression = function () {
+			if ($scope.expression) {
+				$scope.ampPage.Fields.push({ FieldName: $scope.expression, Ordinal: $scope.ampPage.Fields.length });
+			}
+		}
+
+		$scope.removeField = function (fieldName) {
+			if ($scope.ampPage.Fields) {
+				for (var i = 0; i < $scope.ampPage.Fields.length; i++) {
+					if ($scope.ampPage.Fields[i].FieldName === fieldName) {
+						$scope.ampPage.Fields.splice(i, 1);
+					}
+				}
+			}
+		}
+
 		$scope.isFieldItemSelected = function (fieldName) {
 			if ($scope.ampPage.Fields) {
 				for (var i = 0; i < $scope.ampPage.Fields.length; i++) {

@@ -115,7 +115,6 @@ namespace Telerik.Sitefinity.AMP
 
 			if (ampPage != null)
 			{
-				// TODO: find better way to get resolved item URL
 				var resolvedDataItem = SystemManager.HttpContextItems["detailItem"] as ILocatable;
 				if (resolvedDataItem == null)
 				{
