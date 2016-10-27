@@ -134,7 +134,7 @@ namespace Telerik.Sitefinity.AMP.Models
 		/// Gets or sets the templte path.
 		/// </summary>
 		/// <value>The templte path.</value>
-		public string TempltePath { get; set; }
+		public string TemplatePath { get; set; }
 
         #endregion
         

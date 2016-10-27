@@ -25,7 +25,7 @@ namespace Telerik.Sitefinity.AMP.Web.Services.Dto
             this.PageId = ampPage.PageId;
             this.Fields = JsonSerializer.DeserializeFromString<IList<AmpPageFieldDto>>(ampPage.FieldsListJson);
             this.UrlName = ampPage.UrlName;
-			this.TempltePath = ampPage.TempltePath;
+			this.TemplatePath = ampPage.TemplatePath;
 			this.LayoutTemplatePath = ampPage.LayoutTemplatePath;
 			this.PageUrl = ampPage.PageUrl;
         }
@@ -42,7 +42,7 @@ namespace Telerik.Sitefinity.AMP.Web.Services.Dto
             this.PageId = ampPageInsertRequest.PageId;
             this.Fields = ampPageInsertRequest.Fields;
             this.UrlName = ampPageInsertRequest.UrlName;
-			this.TempltePath = ampPageInsertRequest.TempltePath;
+			this.TemplatePath = ampPageInsertRequest.TemplatePath;
 			this.LayoutTemplatePath = ampPageInsertRequest.LayoutTemplatePath;
 			this.PageUrl = ampPageInsertRequest.PageUrl;
         }
@@ -60,7 +60,7 @@ namespace Telerik.Sitefinity.AMP.Web.Services.Dto
             this.PageId = ampPageUpdateRequest.PageId;
             this.Fields = ampPageUpdateRequest.Fields;
             this.UrlName = ampPageUpdateRequest.UrlName;
-			this.TempltePath = ampPageUpdateRequest.TempltePath;
+			this.TemplatePath = ampPageUpdateRequest.TemplatePath;
 			this.LayoutTemplatePath = ampPageUpdateRequest.LayoutTemplatePath;
 			this.PageUrl = ampPageUpdateRequest.PageUrl;
         }
@@ -73,7 +73,7 @@ namespace Telerik.Sitefinity.AMP.Web.Services.Dto
             ampPage.FieldsListJson = JsonSerializer.SerializeToString<IList<AmpPageFieldDto>>(this.Fields);
             ampPage.UrlName = this.UrlName;
 			ampPage.LayoutTemplatePath = this.LayoutTemplatePath;
-			ampPage.TempltePath = this.TempltePath;
+			ampPage.TemplatePath = this.TemplatePath;
 			ampPage.PageUrl = this.PageUrl;
         }
 
@@ -118,7 +118,7 @@ namespace Telerik.Sitefinity.AMP.Web.Services.Dto
 		/// Gets or sets the templte path.
 		/// </summary>
 		/// <value>The templte path.</value>
-		public string TempltePath { get; set; }
+		public string TemplatePath { get; set; }
 
 		/// <summary>
 		/// Gets or sets the page URL.

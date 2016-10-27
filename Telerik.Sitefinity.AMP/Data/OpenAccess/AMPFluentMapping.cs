@@ -64,7 +64,7 @@ namespace Telerik.Sitefinity.AMP.Data.OpenAccess
             mapping.HasProperty(p => p.LastModified);
 			mapping.HasProperty(p => p.DateCreated);
 			mapping.HasProperty(p => p.LayoutTemplatePath).IsText(this.Context, 255);
-			mapping.HasProperty(p => p.TempltePath).IsText(this.Context, 255);
+			mapping.HasProperty(p => p.TemplatePath).IsText(this.Context, 255);
 			mapping.HasProperty(p => p.PageUrl).IsText(this.Context);
 
             mapping.HasIndex(p => p.Title).IsUnique().WithName("idx_title");

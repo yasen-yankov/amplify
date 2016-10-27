@@ -52,6 +52,18 @@
 						<label for="ampPageId" class="sfTxtLbl">PageId</label>
 						<input id="ampPageId" type="text" ng-model="ampPage.PageId" class="sfTxt" />
 					</div>
+					<div>
+						<label for="ampPageUrl" class="sfTxtLbl">PageUrl</label>
+						<input id="ampPageUrl" type="text" ng-model="ampPage.PageUrl" class="sfTxt" />
+					</div>
+					<div>
+						<label for="ampPageLayoutTemplatePath" class="sfTxtLbl">LayoutTemplatePath</label>
+						<input id="ampPageLayoutTemplatePath" type="text" ng-model="ampPage.LayoutTemplatePath" class="sfTxt" />
+					</div>
+					<div>
+						<label for="ampPageTemplatePath" class="sfTxtLbl">TemplatePath</label>
+						<input id="ampPageTemplatePath" type="text" ng-model="ampPage.TemplatePath" class="sfTxt" />
+					</div>
 					<div style="float: left; padding-left: 50px;">
 						<label class="sfTxtLbl">Canonical URL in AMP page (original item URL)</label>
 						<label>/page-url/[item URL]</label>

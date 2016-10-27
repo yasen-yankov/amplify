@@ -39,7 +39,7 @@ namespace Telerik.Sitefinity.AMP.Mvc.Models
 			this.SetPageData(ampPageData, (ILocatable)dataItem);
 
 			string layoutTemplatePath = GetLayoutTemplate(ampPageData.LayoutTemplatePath);
-			string templatePath = GetTemplate(ampPageData.TempltePath);
+			string templatePath = GetTemplate(ampPageData.TemplatePath);
 
 			var fields = JsonConvert.DeserializeObject<List<AmpPageFieldDto>>(ampPageData.FieldsListJson).OrderBy(x => x.Ordinal);
 
