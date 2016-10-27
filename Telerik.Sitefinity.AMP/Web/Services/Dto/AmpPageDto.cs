@@ -25,6 +25,8 @@ namespace Telerik.Sitefinity.AMP.Web.Services.Dto
             this.PageId = ampPage.PageId;
             this.Fields = JsonSerializer.DeserializeFromString<IList<AmpPageFieldDto>>(ampPage.FieldsListJson);
             this.UrlName = ampPage.UrlName;
+			this.TempltePath = ampPage.TempltePath;
+			this.LayoutTemplatePath = ampPage.LayoutTemplatePath;
         }
 
         public AmpPageDto(AmpPageInsertRequest ampPageInsertRequest)
@@ -39,6 +41,8 @@ namespace Telerik.Sitefinity.AMP.Web.Services.Dto
             this.PageId = ampPageInsertRequest.PageId;
             this.Fields = ampPageInsertRequest.Fields;
             this.UrlName = ampPageInsertRequest.UrlName;
+			this.TempltePath = ampPageInsertRequest.TempltePath;
+			this.LayoutTemplatePath = ampPageInsertRequest.LayoutTemplatePath;
         }
 
         public AmpPageDto(AmpPageUpdateRequest ampPageUpdateRequest)
@@ -54,6 +58,8 @@ namespace Telerik.Sitefinity.AMP.Web.Services.Dto
             this.PageId = ampPageUpdateRequest.PageId;
             this.Fields = ampPageUpdateRequest.Fields;
             this.UrlName = ampPageUpdateRequest.UrlName;
+			this.TempltePath = ampPageUpdateRequest.TempltePath;
+			this.LayoutTemplatePath = ampPageUpdateRequest.LayoutTemplatePath;
         }
 
         public void ToAmpPage(AmpPage ampPage)
@@ -63,6 +69,8 @@ namespace Telerik.Sitefinity.AMP.Web.Services.Dto
             ampPage.PageId = this.PageId;
             ampPage.FieldsListJson = JsonSerializer.SerializeToString<IList<AmpPageFieldDto>>(this.Fields);
             ampPage.UrlName = this.UrlName;
+			ampPage.LayoutTemplatePath = this.LayoutTemplatePath;
+			ampPage.TempltePath = this.TempltePath;
         }
 
         /// <summary>
@@ -95,5 +103,17 @@ namespace Telerik.Sitefinity.AMP.Web.Services.Dto
         /// Gets or sets the Fields list.
         /// </summary>
         public IList<AmpPageFieldDto> Fields { get; set; }
+
+		/// <summary>
+		/// Gets or sets the layout template path.
+		/// </summary>
+		/// <value>The layout template path.</value>
+		public string LayoutTemplatePath { get; set; }
+
+		/// <summary>
+		/// Gets or sets the templte path.
+		/// </summary>
+		/// <value>The templte path.</value>
+		public string TempltePath { get; set; }
     }
 }

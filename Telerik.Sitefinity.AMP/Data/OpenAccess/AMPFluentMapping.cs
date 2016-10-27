@@ -62,7 +62,9 @@ namespace Telerik.Sitefinity.AMP.Data.OpenAccess
             mapping.HasProperty(p => p.FieldsListJson).IsNullable().WithInfiniteLength();
             mapping.HasProperty(p => p.ApplicationName);
             mapping.HasProperty(p => p.LastModified);
-            mapping.HasProperty(p => p.DateCreated);
+			mapping.HasProperty(p => p.DateCreated);
+			mapping.HasProperty(p => p.LayoutTemplatePath).IsText(this.Context, 255);
+			mapping.HasProperty(p => p.TempltePath).IsText(this.Context, 255);
 
             mapping.HasIndex(p => p.Title).IsUnique().WithName("idx_title");
             mapping.HasIndex(p => p.UrlName).IsUnique().WithName("idx_urlName");

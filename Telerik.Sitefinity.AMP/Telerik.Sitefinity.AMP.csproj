@@ -208,7 +208,7 @@
     <Compile Include="Data\OpenAccess\AMPStorageMetadataSource.cs" />
     <Compile Include="Models\AmpPage.cs" />
     <Compile Include="Mvc\Controllers\AmpPageController.cs" />
-    <Compile Include="Mvc\Controllers\AmpPageDataModel.cs" />
+    <Compile Include="Mvc\Models\AmpPageViewModel.cs" />
     <Compile Include="Mvc\HtmlHelpers\AmpComponentHtmlHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\Services\Dto\AmpConfigurationDto.cs" />

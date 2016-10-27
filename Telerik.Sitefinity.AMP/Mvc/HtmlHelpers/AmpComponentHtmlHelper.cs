@@ -1,5 +1,5 @@
 ﻿using Html2Amp;
-using SitefinityWebApp.Mvc.Controllers;
+using Telerik.Sitefinity.AMP.Mvc.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +16,7 @@ using Telerik.Sitefinity.Web.Utilities;
 using Telerik.Sitefinity.RelatedData;
 using System.Web.UI;
 
-namespace SitefinityWebApp.Mvc.HtmlHelpers
+namespace Telerik.Sitefinity.AMP.Mvc.HtmlHelpers
 {
 	public static class AmpComponentHtmlHelper
 	{

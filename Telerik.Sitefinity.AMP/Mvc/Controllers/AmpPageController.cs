@@ -9,12 +9,14 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Telerik.Sitefinity.AMP;
+using Telerik.Sitefinity.AMP.Configuration;
 using Telerik.Sitefinity.AMP.Web.Services.Dto;
+using Telerik.Sitefinity.Configuration;
 using Telerik.Sitefinity.Data;
 using Telerik.Sitefinity.Model;
 using Telerik.Sitefinity.Utilities.TypeConverters;
 
-namespace SitefinityWebApp.Mvc.Controllers
+namespace Telerik.Sitefinity.AMP.Mvc.Models
 {
 	public class AmpPageController : Controller
 	{
@@ -25,30 +27,51 @@ namespace SitefinityWebApp.Mvc.Controllers
 			Guard.Requires(itemUrl, "itemUrl").IsNotNullOrEmpty();
 
 			itemUrl = "/" + itemUrl;
-
 			var ampPageData = AMPManager.GetManager().GetAmpPage(ampPageUrl);
-
 			if (ampPageData == null)
 			{
 				return this.HttpNotFound(string.Format("There is no AMP page with url: {0}", ampPageUrl));
 			}
 
-			var itemType = TypeResolutionService.ResolveType(ampPageData.ItemType);
-			IDataItem dataItem = this.GetDataItem(itemType, itemUrl);
+			IDataItem dataItem = this.GetDataItem(ampPageData.ItemType, itemUrl);
 
 			this.ViewBag.Title = ampPageData.Title;
 
 			var fields = JsonConvert.DeserializeObject<List<AmpPageFieldDto>>(ampPageData.FieldsListJson);
 
-			return View(new AmpPageViewModel
+			string layoutTemplatePath = GetLayoutTemplate(ampPageData.LayoutTemplatePath);
+			string templatePath = GetTemplate(ampPageData.TempltePath);
+
+			return View(templatePath, masterName: layoutTemplatePath, model: new AmpPageViewModel
 			{
 				DataItem = dataItem,
 				Fields = fields.OrderBy(x => x.Ordinal)
 			});
 		}
 
-		private IDataItem GetDataItem(Type itemType, string itemUrl)
+		private static string GetTemplate(string template)
 		{
+			if (string.IsNullOrEmpty(template))
+			{
+				return Config.Get<AMPConfig>().DefaultTemplate;
+			}
+
+			return template;
+		}
+
+		private static string GetLayoutTemplate(string layoutTemplatePath)
+		{
+			if (string.IsNullOrEmpty(layoutTemplatePath))
+			{
+				return Config.Get<AMPConfig>().DefaultLayoutTemplate;
+			}
+
+			return layoutTemplatePath;
+		}
+
+		private IDataItem GetDataItem(string itemTypeName, string itemUrl)
+		{
+			var itemType = TypeResolutionService.ResolveType(itemTypeName);
 			var manager = ManagerBase.GetMappedManager(itemType);
 
 			string redirectUrl;

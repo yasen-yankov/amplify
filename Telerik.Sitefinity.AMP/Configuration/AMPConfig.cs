@@ -94,5 +94,31 @@ namespace Telerik.Sitefinity.AMP.Configuration
 				this["ampComponents"] = value;
 			}
 		}
+
+		[ConfigurationProperty("defaultLayoutTemplate", DefaultValue = "_AMPLayout")]
+		public string DefaultLayoutTemplate
+		{
+			get
+			{
+				return (string)this["defaultLayoutTemplate"];
+			}
+			set
+			{
+				this["defaultLayoutTemplate"] = value;
+			}
+		}
+
+		[ConfigurationProperty("defaultTemplate", DefaultValue="Index")]
+		public string DefaultTemplate
+		{
+			get
+			{
+				return (string)this["defaultTemplate"];
+			}
+			set
+			{
+				this["defaultTemplate"] = value;
+			}
+		}
 	}
 }

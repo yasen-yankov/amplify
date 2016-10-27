@@ -1183,7 +1183,7 @@
     <Content Include="App_Data\Sitefinity\Configuration\SystemConfig.config" />
     <Content Include="App_Data\Sitefinity\Sitefinity.lic" />
     <Content Include="Views\AmpPage\Index.cshtml" />
-    <Content Include="Mvc\Views\Shared\_AMPLayout.cshtml" />
+    <Content Include="Views\Shared\_AMPLayout.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
